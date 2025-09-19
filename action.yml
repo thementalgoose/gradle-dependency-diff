@@ -1,0 +1,22 @@
+name: 'Dependency Diffs'
+description: 'Output the dependency differences between two branches'
+inputs:
+  gradle_command: 
+    description: The gradle command to output the dependency report
+    default: ./gradlew :app:dependencies --configuration releaseRuntimeClasspath
+  base_branch:
+    description: The base branch 
+    default: null
+  target_branch:
+    description: The target branch 
+    default: null
+  post_as_pr_comment:
+    description: Post the output as a pull request comment if this is ran as part of pull request workflow
+    default: true
+  exclude_dependencies:
+    description: List of dependencies to exclude changes for
+    default: []
+runs: 
+  using: 'node20'
+  main: 'dist/index.js'
+
