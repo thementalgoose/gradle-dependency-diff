@@ -11,9 +11,7 @@ async function main() {
 
     let difference = transform(parseOutput(file1), parseOutput(file2));
 
-    console.log("============================================");
     printStack(difference)
-    console.log("============================================");
 }
 
 main();

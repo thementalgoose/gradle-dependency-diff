@@ -1,26 +1,32 @@
 import { Addition, Deletion, DependencyChange, Difference } from "../models/dependency-change.model";
+import { Changes, TransformOverview } from "../models/transform-overview.model";
 
 export function printStack(
-    changes: DependencyChange[],
+    overview: TransformOverview,
     printout: (string) => void = x => { console.log(x); }
 ) { 
-    for (let c of changes) { 
-        if (c instanceof Difference) { 
-            printout(`${space(c.path.length)}- ${c.newDependency.name}:${getLatestVersion(c.oldDependency.version_info)} -> ${getLatestVersion(c.newDependency.version_info)}`)
-            for (let x of c.subChanges) { 
-                printStack(c.subChanges, printout)
+    let additions = overview.getAdditionsByName();
+    let deletions = overview.getDeletionsByName();
+    let differences = overview.getDifferencesByName();
+
+    printout("=== ADDITIONS =================================");
+    printChanges(additions, printout);
+    printout("=== DELETIONS =================================");
+    printChanges(deletions, printout);
+    printout("=== DIFFERENCES ===============================");
+    printChanges(differences, printout);
+}
+
+function printChanges(tree: Changes, printout: (string) => void) { 
+    if (Object.keys(tree).length != 0) { 
+        for (let x in tree) { 
+            printout(`- ${x}`);
+            for (let paths of tree[x]) { 
+                printout(`  - ${paths.getOverview()}`);
             }
         }
-        if (c instanceof Addition) {
-            if (c.newDependency.version_info == "") { 
-                printout(`${space(c.path.length)}- ${c.newDependency.name} [ADDED]`)
-            } else { 
-                printout(`${space(c.path.length)}- ${c.newDependency.name}:${getLatestVersion(c.newDependency.version_info)} [ADDED]`)
-            }
-        }
-        if (c instanceof Deletion) {
-            printout(`${space(c.path.length)}- ${c.oldDependency.name} [REMOVED]`)
-        }
+    } else { 
+        printout("- None found");
     }
 }
 

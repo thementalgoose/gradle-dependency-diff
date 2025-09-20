@@ -2,9 +2,21 @@ import { after } from "node:test";
 import { Addition, Deletion, DependencyChange, Difference } from "../models/dependency-change.model";
 import { Dependency } from "../models/dependency.model";
 import { versions } from "process";
+import { TransformOverview } from "../models/transform-overview.model";
+import { diff } from "util";
 
-export function transform(before: Dependency[], after: Dependency[]): DependencyChange[] { 
-    return compareDependencies([], before, after)
+export function transform(before: Dependency[], after: Dependency[]): TransformOverview { 
+    let depChanges = compareDependencies([], before, after);
+
+    let additions = depChanges.filter(x => x instanceof Addition);
+    let deletions = depChanges.filter(x => x instanceof Deletion);
+    let differences = depChanges.filter(x => x instanceof Difference);
+
+    return new TransformOverview(
+        additions, 
+        deletions,
+        differences
+    )
 }
 
 function compareDependency(path: string[], bef: Dependency | null, aft: Dependency | null): DependencyChange[] { 
@@ -22,7 +34,11 @@ function compareDependency(path: string[], bef: Dependency | null, aft: Dependen
     newPath.push(aft!!.name);
 
     if (getLatestVersion(bef!!.version_info) != getLatestVersion(aft!!.version_info)) { 
-        return [new Difference(path, bef!!, aft!!, compareDependencies(newPath, bef!!.children, aft!!.children))]
+        let arr: DependencyChange[] = [new Difference(path, bef!!, aft!!)]
+        for (let x of compareDependencies(newPath, bef!!.children, aft!!.children)) { 
+            arr.push(x);
+        }
+        return arr;
     } else { 
         return compareDependencies(newPath, bef!!.children, aft!!.children);
     }

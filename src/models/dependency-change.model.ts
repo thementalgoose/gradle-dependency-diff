@@ -3,6 +3,8 @@ import { Dependency } from "./dependency.model";
 export interface DependencyChange {
     path: string[];
     getPathString(): string;
+
+    getOverview(): string;
 };
 
 export class Addition implements DependencyChange { 
@@ -21,6 +23,10 @@ export class Addition implements DependencyChange {
     getPathString(): string { 
         return this.path.join(", ");
     }
+
+    getOverview(): string {
+        return `${this.newDependency.name}:${getLatestVersion(this.newDependency.version_info)}`
+    }
 }
 
 export class Deletion implements DependencyChange {
@@ -38,6 +44,10 @@ export class Deletion implements DependencyChange {
 
     getPathString(): string { 
         return this.path.join(", ");
+    }
+
+    getOverview(): string {
+        return `${this.oldDependency.name}:${getLatestVersion(this.oldDependency.version_info)}`
     }
 }
 
@@ -62,5 +72,25 @@ export class Difference implements DependencyChange {
 
     getPathString(): string { 
         return this.path.join(", ");
+    }
+
+    getOverview(): string {
+        return `${this.newDependency.name}:${getLatestVersion(this.oldDependency.version_info)} -> ${getLatestVersion(this.newDependency.version_info)}`
+    }
+}
+
+/**
+ * Get version from version string
+ * "1.1.0 -> 1.2.0 (*)"
+ * "1.1.0 -> 1.2.0 (c)"
+ * "1.1.0"
+ */
+function getLatestVersion(versionString: string) { 
+    if (versionString.indexOf("->") !== -1) { 
+        return versionString.split("->")[1].replace("(*)", "").replace("(c)", "").trim();
+    } else if (versionString.indexOf(" ") !== -1) {
+        return versionString.split(" ")[0].trim()
+    } else { 
+        return versionString
     }
 }

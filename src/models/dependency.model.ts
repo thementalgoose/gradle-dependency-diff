@@ -13,4 +13,8 @@ export class Dependency {
         this.version_info = version_info;
         this.children = children;
     }
+
+    isModule(): boolean {
+        return this.name.startsWith(":")
+    }
 }
