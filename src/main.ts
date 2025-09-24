@@ -9,8 +9,6 @@ async function run(): Promise<boolean> {
         let target_branch = core.getInput("target_branch");
         let post_as_pr_comment = core.getInput("post_as_pr_comment");
         let exclude_dependencies = core.getInput("exclude_dependencies");
-
-        console.log("Help!)");
         
 
     } catch (error: any) {

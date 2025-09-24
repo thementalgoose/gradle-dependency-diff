@@ -84,8 +84,12 @@ function stripModuleName(line: string): string {
 /**
  * Strip module out of project string
  * "|         |                   \--- org.jetbrains.kotlin:kotlin-stdlib:1.9.23 -> 2.2.20 (*)"
+ * "+--- org.jetbrains.kotlin:kotlin-stdlib -> 2.2.20 (*)"
  */
 function stripDependencyName(line: string): string { 
+    if (line.indexOf("project :") !== -1) { 
+        return line.split("---")[1].replace("project", "").trim();
+    }
     let numberOfColons = (line.match(new RegExp(":", "g")) || []).length;
     if (numberOfColons <= 1) { 
         return line.split("---")[1].trim().split(" ")[0].trim();
@@ -97,8 +101,13 @@ function stripDependencyName(line: string): string {
 /**
  * Strip module out of project string
  * "|         |                   \--- org.jetbrains.kotlin:kotlin-stdlib:1.9.23 -> 2.2.20 (*)"
+ * "+---org.jetbrains.kotlin:kotlin-stdlib -> 2.2.20 (*)"
  */
 function stripVersionInfo(line: string): string { 
     let numberOfColons = (line.match(new RegExp(":", "g")) || []).length;
-    return line.split(":")[numberOfColons].replace("(*)", "").trim();
+    if (line.indexOf("->") !== -1) { 
+        return line.split("->")[1].replace("(*)", "").replace("(c)", "").trim();
+    } else { 
+        return line.split(":")[numberOfColons].replace("(*)", "").replace("(c)", "").trim();
+    }
 }

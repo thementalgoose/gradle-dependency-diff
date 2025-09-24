@@ -75,7 +75,13 @@ export class Difference implements DependencyChange {
     }
 
     getOverview(): string {
-        return `${this.newDependency.name}:${getLatestVersion(this.oldDependency.version_info)} -> ${getLatestVersion(this.newDependency.version_info)}`
+        let oldVersion = getLatestVersion(this.oldDependency.version_info);
+        let newVersion = getLatestVersion(this.newDependency.version_info);
+        if (oldVersion == newVersion) { 
+            return `${this.newDependency.name}`
+        } else { 
+            return `${this.newDependency.name}:${oldVersion} -> ${newVersion}`
+        }
     }
 }
 

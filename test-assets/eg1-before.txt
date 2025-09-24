@@ -1,3 +1,4 @@
+Starting a Gradle Daemon, 2 incompatible and 2 stopped Daemons could not be reused, use --status for details
 Calculating task graph as configuration cache cannot be reused because file 'gradle/libs.versions.toml' has changed.
 Type-safe project accessors is an incubating feature.
 Project accessors enabled, but root project name not explicitly set for 'build-logic'. Checking out the project in different folders will impact the generated code and implicitly the buildscript classpath, breaking caching.
@@ -353,9 +354,9 @@ productionReleaseRuntimeClasspath - Resolved configuration for runtime for varia
 |    |    |         |         +--- androidx.datastore:datastore-core-okio:1.1.7
 |    |    |         |         |    \--- androidx.datastore:datastore-core-okio-jvm:1.1.7
 |    |    |         |         |         +--- androidx.datastore:datastore-core:1.1.7 (*)
-|    |    |         |         |         +--- com.squareup.okio:okio:3.4.0 -> 3.15.0
-|    |    |         |         |         |    \--- com.squareup.okio:okio-jvm:3.15.0
-|    |    |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
+|    |    |         |         |         +--- com.squareup.okio:okio:3.4.0 -> 3.16.0
+|    |    |         |         |         |    \--- com.squareup.okio:okio-jvm:3.16.0
+|    |    |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.0 -> 2.2.20 (*)
 |    |    |         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.22 -> 2.2.20 (*)
 |    |    |         |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3 -> 1.10.2 (*)
 |    |    |         |         |         +--- androidx.datastore:datastore:1.1.7 (c)
@@ -364,7 +365,7 @@ productionReleaseRuntimeClasspath - Resolved configuration for runtime for varia
 |    |    |         |         |         +--- androidx.datastore:datastore-preferences-core:1.1.7 (c)
 |    |    |         |         |         +--- androidx.datastore:datastore-preferences-proto:1.1.7 (c)
 |    |    |         |         |         \--- androidx.datastore:datastore-preferences-external-protobuf:1.1.7 (c)
-|    |    |         |         +--- com.squareup.okio:okio:3.4.0 -> 3.15.0 (*)
+|    |    |         |         +--- com.squareup.okio:okio:3.4.0 -> 3.16.0 (*)
 |    |    |         |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.22 -> 2.2.20 (*)
 |    |    |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3 -> 1.10.2 (*)
 |    |    |         |         +--- androidx.datastore:datastore-core:1.1.7 (c)
@@ -391,7 +392,7 @@ productionReleaseRuntimeClasspath - Resolved configuration for runtime for varia
 |    |    |         |         |    +--- androidx.datastore:datastore-preferences:1.1.7 (c)
 |    |    |         |         |    +--- androidx.datastore:datastore-preferences-core:1.1.7 (c)
 |    |    |         |         |    \--- androidx.datastore:datastore-preferences-external-protobuf:1.1.7 (c)
-|    |    |         |         +--- com.squareup.okio:okio:3.4.0 -> 3.15.0 (*)
+|    |    |         |         +--- com.squareup.okio:okio:3.4.0 -> 3.16.0 (*)
 |    |    |         |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.22 -> 2.2.20 (*)
 |    |    |         |         +--- androidx.datastore:datastore:1.1.7 (c)
 |    |    |         |         +--- androidx.datastore:datastore-core:1.1.7 (c)
@@ -617,135 +618,132 @@ productionReleaseRuntimeClasspath - Resolved configuration for runtime for varia
 |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:2.2.20 (*)
 |    |    |    +--- io.insert-koin:koin-core:4.1.0 (*)
 |    |    |    \--- project :infrastructure
-|    |    |         +--- io.ktor:ktor-client-okhttp:3.2.3
-|    |    |         |    \--- io.ktor:ktor-client-okhttp-jvm:3.2.3
+|    |    |         +--- io.ktor:ktor-client-okhttp:3.3.0
+|    |    |         |    \--- io.ktor:ktor-client-okhttp-jvm:3.3.0
 |    |    |         |         +--- org.slf4j:slf4j-api:2.0.17
-|    |    |         |         +--- io.ktor:ktor-client-core:3.2.3
-|    |    |         |         |    \--- io.ktor:ktor-client-core-jvm:3.2.3
+|    |    |         |         +--- io.ktor:ktor-client-core:3.3.0
+|    |    |         |         |    \--- io.ktor:ktor-client-core-jvm:3.3.0
 |    |    |         |         |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         |         +--- io.ktor:ktor-http:3.2.3
-|    |    |         |         |         |    \--- io.ktor:ktor-http-jvm:3.2.3
+|    |    |         |         |         +--- io.ktor:ktor-http:3.3.0
+|    |    |         |         |         |    \--- io.ktor:ktor-http-jvm:3.3.0
 |    |    |         |         |         |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         |         |         +--- io.ktor:ktor-utils:3.2.3
-|    |    |         |         |         |         |    \--- io.ktor:ktor-utils-jvm:3.2.3
+|    |    |         |         |         |         +--- io.ktor:ktor-utils:3.3.0
+|    |    |         |         |         |         |    \--- io.ktor:ktor-utils-jvm:3.3.0
 |    |    |         |         |         |         |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         |         |         |         +--- io.ktor:ktor-io:3.2.3
-|    |    |         |         |         |         |         |    \--- io.ktor:ktor-io-jvm:3.2.3
+|    |    |         |         |         |         |         +--- io.ktor:ktor-io:3.3.0
+|    |    |         |         |         |         |         |    \--- io.ktor:ktor-io-jvm:3.3.0
 |    |    |         |         |         |         |         |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         |         |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-io-core:0.7.0
-|    |    |         |         |         |         |         |         |    \--- org.jetbrains.kotlinx:kotlinx-io-core-jvm:0.7.0
-|    |    |         |         |         |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-io-bytestring:0.7.0
-|    |    |         |         |         |         |         |         |         |    \--- org.jetbrains.kotlinx:kotlinx-io-bytestring-jvm:0.7.0
-|    |    |         |         |         |         |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.0 -> 2.2.20 (*)
-|    |    |         |         |         |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.0 -> 2.2.20 (*)
-|    |    |         |         |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
-|    |    |         |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-serialization-core:1.8.1 -> 1.9.0 (*)
-|    |    |         |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
-|    |    |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-serialization-core:1.8.1 -> 1.9.0 (*)
-|    |    |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
-|    |    |         |         |         +--- io.ktor:ktor-http-cio:3.2.3
-|    |    |         |         |         |    \--- io.ktor:ktor-http-cio-jvm:3.2.3
+|    |    |         |         |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-io-core:0.8.0
+|    |    |         |         |         |         |         |         |    \--- org.jetbrains.kotlinx:kotlinx-io-core-jvm:0.8.0
+|    |    |         |         |         |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-io-bytestring:0.8.0
+|    |    |         |         |         |         |         |         |         |    \--- org.jetbrains.kotlinx:kotlinx-io-bytestring-jvm:0.8.0
+|    |    |         |         |         |         |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.0 -> 2.2.20 (*)
+|    |    |         |         |         |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.0 -> 2.2.20 (*)
+|    |    |         |         |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
+|    |    |         |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-serialization-core:1.9.0 (*)
+|    |    |         |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
+|    |    |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-serialization-core:1.9.0 (*)
+|    |    |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
+|    |    |         |         |         +--- io.ktor:ktor-http-cio:3.3.0
+|    |    |         |         |         |    \--- io.ktor:ktor-http-cio-jvm:3.3.0
 |    |    |         |         |         |         +--- org.slf4j:slf4j-api:2.0.17
-|    |    |         |         |         |         +--- io.ktor:ktor-network:3.2.3
-|    |    |         |         |         |         |    \--- io.ktor:ktor-network-jvm:3.2.3
+|    |    |         |         |         |         +--- io.ktor:ktor-network:3.3.0
+|    |    |         |         |         |         |    \--- io.ktor:ktor-network-jvm:3.3.0
 |    |    |         |         |         |         |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         |         |         |         +--- io.ktor:ktor-utils:3.2.3 (*)
-|    |    |         |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
+|    |    |         |         |         |         |         +--- io.ktor:ktor-utils:3.3.0 (*)
+|    |    |         |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
 |    |    |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         |         |         +--- io.ktor:ktor-http:3.2.3 (*)
-|    |    |         |         |         |         +--- io.ktor:ktor-io:3.2.3 (*)
-|    |    |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
-|    |    |         |         |         +--- io.ktor:ktor-events:3.2.3
-|    |    |         |         |         |    \--- io.ktor:ktor-events-jvm:3.2.3
+|    |    |         |         |         |         +--- io.ktor:ktor-http:3.3.0 (*)
+|    |    |         |         |         |         +--- io.ktor:ktor-io:3.3.0 (*)
+|    |    |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
+|    |    |         |         |         +--- io.ktor:ktor-events:3.3.0
+|    |    |         |         |         |    \--- io.ktor:ktor-events-jvm:3.3.0
 |    |    |         |         |         |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         |         |         +--- io.ktor:ktor-utils:3.2.3 (*)
-|    |    |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
-|    |    |         |         |         +--- io.ktor:ktor-websocket-serialization:3.2.3
-|    |    |         |         |         |    \--- io.ktor:ktor-websocket-serialization-jvm:3.2.3
+|    |    |         |         |         |         +--- io.ktor:ktor-utils:3.3.0 (*)
+|    |    |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
+|    |    |         |         |         +--- io.ktor:ktor-websocket-serialization:3.3.0
+|    |    |         |         |         |    \--- io.ktor:ktor-websocket-serialization-jvm:3.3.0
 |    |    |         |         |         |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         |         |         +--- io.ktor:ktor-serialization:3.2.3
-|    |    |         |         |         |         |    \--- io.ktor:ktor-serialization-jvm:3.2.3
+|    |    |         |         |         |         +--- io.ktor:ktor-serialization:3.3.0
+|    |    |         |         |         |         |    \--- io.ktor:ktor-serialization-jvm:3.3.0
 |    |    |         |         |         |         |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         |         |         |         +--- io.ktor:ktor-websockets:3.2.3
-|    |    |         |         |         |         |         |    \--- io.ktor:ktor-websockets-jvm:3.2.3
+|    |    |         |         |         |         |         +--- io.ktor:ktor-websockets:3.3.0
+|    |    |         |         |         |         |         |    \--- io.ktor:ktor-websockets-jvm:3.3.0
 |    |    |         |         |         |         |         |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         |         |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         |         |         |         |         +--- io.ktor:ktor-utils:3.2.3 (*)
-|    |    |         |         |         |         |         |         +--- io.ktor:ktor-http:3.2.3 (*)
-|    |    |         |         |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
-|    |    |         |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
-|    |    |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
-|    |    |         |         |         +--- io.ktor:ktor-sse:3.2.3
-|    |    |         |         |         |    \--- io.ktor:ktor-sse-jvm:3.2.3
+|    |    |         |         |         |         |         |         +--- io.ktor:ktor-utils:3.3.0 (*)
+|    |    |         |         |         |         |         |         +--- io.ktor:ktor-http:3.3.0 (*)
+|    |    |         |         |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
+|    |    |         |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
+|    |    |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
+|    |    |         |         |         +--- io.ktor:ktor-sse:3.3.0
+|    |    |         |         |         |    \--- io.ktor:ktor-sse-jvm:3.3.0
 |    |    |         |         |         |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         |         |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         |         |         +--- io.ktor:ktor-utils:3.2.3 (*)
-|    |    |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
-|    |    |         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
+|    |    |         |         |         |         +--- io.ktor:ktor-utils:3.3.0 (*)
+|    |    |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
+|    |    |         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
 |    |    |         |         |         \--- org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.10.2
 |    |    |         |         |              +--- org.slf4j:slf4j-api:1.7.32 -> 2.0.17
 |    |    |         |         |              +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
 |    |    |         |         |              +--- org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.10.2 (*)
 |    |    |         |         |              \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.0 -> 2.2.20 (*)
-|    |    |         |         +--- com.squareup.okhttp3:okhttp:4.12.0 -> 5.0.0
-|    |    |         |         |    \--- com.squareup.okhttp3:okhttp-android:5.0.0
+|    |    |         |         +--- com.squareup.okhttp3:okhttp:5.1.0
+|    |    |         |         |    \--- com.squareup.okhttp3:okhttp-android:5.1.0
 |    |    |         |         |         +--- androidx.annotation:annotation:1.9.1 (*)
 |    |    |         |         |         +--- androidx.startup:startup-runtime:1.2.0 (*)
-|    |    |         |         |         +--- com.squareup.okio:okio:3.15.0 (*)
+|    |    |         |         |         +--- com.squareup.okio:okio:3.15.0 -> 3.16.0 (*)
 |    |    |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.0 -> 2.2.20 (*)
-|    |    |         |         +--- com.squareup.okhttp3:okhttp-sse:4.12.0
-|    |    |         |         |    +--- com.squareup.okhttp3:okhttp:4.12.0 -> 5.0.0 (*)
-|    |    |         |         |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21 -> 1.8.22 (*)
-|    |    |         |         +--- com.squareup.okio:okio:3.12.0 -> 3.15.0 (*)
+|    |    |         |         +--- com.squareup.okio:okio:3.16.0 (*)
 |    |    |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
-|    |    |         +--- com.squareup.okhttp3:logging-interceptor:5.0.0
-|    |    |         |    +--- com.squareup.okhttp3:okhttp:5.0.0 (*)
+|    |    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
+|    |    |         +--- com.squareup.okhttp3:logging-interceptor:5.1.0
+|    |    |         |    +--- com.squareup.okhttp3:okhttp:5.1.0 (*)
 |    |    |         |    \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.0 -> 2.2.20 (*)
-|    |    |         +--- com.squareup.okhttp3:okhttp-dnsoverhttps:5.0.0
-|    |    |         |    +--- com.squareup.okhttp3:okhttp:5.0.0 (*)
+|    |    |         +--- com.squareup.okhttp3:okhttp-dnsoverhttps:5.1.0
+|    |    |         |    +--- com.squareup.okhttp3:okhttp:5.1.0 (*)
 |    |    |         |    \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.0 -> 2.2.20 (*)
 |    |    |         +--- org.jetbrains.kotlin:kotlin-stdlib:2.2.20 (*)
 |    |    |         +--- io.insert-koin:koin-core:4.1.0 (*)
-|    |    |         +--- io.ktor:ktor-client-core:3.2.3 (*)
-|    |    |         +--- io.ktor:ktor-client-logging:3.2.3
-|    |    |         |    \--- io.ktor:ktor-client-logging-jvm:3.2.3
+|    |    |         +--- io.ktor:ktor-client-core:3.3.0 (*)
+|    |    |         +--- io.ktor:ktor-client-logging:3.3.0
+|    |    |         |    \--- io.ktor:ktor-client-logging-jvm:3.3.0
 |    |    |         |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.10.2 (*)
 |    |    |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         +--- io.ktor:ktor-client-core:3.2.3 (*)
-|    |    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
-|    |    |         +--- io.ktor:ktor-client-cio:3.2.3
-|    |    |         |    \--- io.ktor:ktor-client-cio-jvm:3.2.3
+|    |    |         |         +--- io.ktor:ktor-client-core:3.3.0 (*)
+|    |    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
+|    |    |         +--- io.ktor:ktor-client-cio:3.3.0
+|    |    |         |    \--- io.ktor:ktor-client-cio-jvm:3.3.0
 |    |    |         |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         +--- io.ktor:ktor-client-core:3.2.3 (*)
-|    |    |         |         +--- io.ktor:ktor-http-cio:3.2.3 (*)
-|    |    |         |         +--- io.ktor:ktor-websockets:3.2.3 (*)
-|    |    |         |         +--- io.ktor:ktor-network-tls:3.2.3
-|    |    |         |         |    \--- io.ktor:ktor-network-tls-jvm:3.2.3
+|    |    |         |         +--- io.ktor:ktor-client-core:3.3.0 (*)
+|    |    |         |         +--- io.ktor:ktor-http-cio:3.3.0 (*)
+|    |    |         |         +--- io.ktor:ktor-websockets:3.3.0 (*)
+|    |    |         |         +--- io.ktor:ktor-network-tls:3.3.0
+|    |    |         |         |    \--- io.ktor:ktor-network-tls-jvm:3.3.0
 |    |    |         |         |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         |         +--- io.ktor:ktor-http:3.2.3 (*)
-|    |    |         |         |         +--- io.ktor:ktor-network:3.2.3 (*)
-|    |    |         |         |         +--- io.ktor:ktor-utils:3.2.3 (*)
-|    |    |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
-|    |    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
-|    |    |         +--- io.ktor:ktor-client-content-negotiation:3.2.3
-|    |    |         |    \--- io.ktor:ktor-client-content-negotiation-jvm:3.2.3
+|    |    |         |         |         +--- io.ktor:ktor-http:3.3.0 (*)
+|    |    |         |         |         +--- io.ktor:ktor-network:3.3.0 (*)
+|    |    |         |         |         +--- io.ktor:ktor-utils:3.3.0 (*)
+|    |    |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
+|    |    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
+|    |    |         +--- io.ktor:ktor-client-content-negotiation:3.3.0
+|    |    |         |    \--- io.ktor:ktor-client-content-negotiation-jvm:3.3.0
 |    |    |         |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         +--- io.ktor:ktor-client-core:3.2.3 (*)
-|    |    |         |         +--- io.ktor:ktor-serialization:3.2.3 (*)
-|    |    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
+|    |    |         |         +--- io.ktor:ktor-client-core:3.3.0 (*)
+|    |    |         |         +--- io.ktor:ktor-serialization:3.3.0 (*)
+|    |    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
 |    |    |         +--- org.jetbrains.kotlinx:kotlinx-datetime:0.7.1 (*)
 |    |    |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
 |    |    |         \--- org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0 (*)
@@ -1825,37 +1823,37 @@ productionReleaseRuntimeClasspath - Resolved configuration for runtime for varia
 |    |    +--- project :infrastructure (*)
 |    |    \--- project :presentation:localisation (*)
 |    +--- project :data:network:flashback
-|    |    +--- io.ktor:ktor-client-okhttp:3.2.3 (*)
-|    |    +--- com.squareup.okhttp3:logging-interceptor:5.0.0 (*)
-|    |    +--- com.squareup.okhttp3:okhttp-dnsoverhttps:5.0.0 (*)
+|    |    +--- io.ktor:ktor-client-okhttp:3.3.0 (*)
+|    |    +--- com.squareup.okhttp3:logging-interceptor:5.1.0 (*)
+|    |    +--- com.squareup.okhttp3:okhttp-dnsoverhttps:5.1.0 (*)
 |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:2.2.20 (*)
 |    |    +--- io.insert-koin:koin-core:4.1.0 (*)
 |    |    +--- project :infrastructure (*)
 |    |    +--- project :core:configuration (*)
-|    |    +--- io.ktor:ktor-client-core:3.2.3 (*)
-|    |    +--- io.ktor:ktor-client-logging:3.2.3 (*)
-|    |    +--- io.ktor:ktor-client-cio:3.2.3 (*)
-|    |    +--- io.ktor:ktor-client-content-negotiation:3.2.3 (*)
-|    |    +--- io.ktor:ktor-serialization-kotlinx-json:3.2.3
-|    |    |    \--- io.ktor:ktor-serialization-kotlinx-json-jvm:3.2.3
+|    |    +--- io.ktor:ktor-client-core:3.3.0 (*)
+|    |    +--- io.ktor:ktor-client-logging:3.3.0 (*)
+|    |    +--- io.ktor:ktor-client-cio:3.3.0 (*)
+|    |    +--- io.ktor:ktor-client-content-negotiation:3.3.0 (*)
+|    |    +--- io.ktor:ktor-serialization-kotlinx-json:3.3.0
+|    |    |    \--- io.ktor:ktor-serialization-kotlinx-json-jvm:3.3.0
 |    |    |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         +--- io.ktor:ktor-serialization-kotlinx:3.2.3
-|    |    |         |    \--- io.ktor:ktor-serialization-kotlinx-jvm:3.2.3
+|    |    |         +--- io.ktor:ktor-serialization-kotlinx:3.3.0
+|    |    |         |    \--- io.ktor:ktor-serialization-kotlinx-jvm:3.3.0
 |    |    |         |         +--- org.slf4j:slf4j-api:2.0.17
 |    |    |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |    |         |         +--- io.ktor:ktor-serialization:3.2.3 (*)
-|    |    |         |         +--- org.jetbrains.kotlinx:kotlinx-serialization-core:1.8.1 -> 1.9.0 (*)
-|    |    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
-|    |    |         +--- org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1 -> 1.9.0 (*)
-|    |    |         +--- org.jetbrains.kotlinx:kotlinx-serialization-json-io:1.8.1 -> 1.9.0
+|    |    |         |         +--- io.ktor:ktor-serialization:3.3.0 (*)
+|    |    |         |         +--- org.jetbrains.kotlinx:kotlinx-serialization-core:1.9.0 (*)
+|    |    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
+|    |    |         +--- org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0 (*)
+|    |    |         +--- org.jetbrains.kotlinx:kotlinx-serialization-json-io:1.9.0
 |    |    |         |    \--- org.jetbrains.kotlinx:kotlinx-serialization-json-io-jvm:1.9.0
 |    |    |         |         +--- org.jetbrains.kotlinx:kotlinx-serialization-bom:1.9.0 (*)
 |    |    |         |         +--- org.jetbrains.kotlin:kotlin-stdlib:2.2.0 -> 2.2.20 (*)
 |    |    |         |         +--- org.jetbrains.kotlinx:kotlinx-serialization-core:1.9.0 (*)
 |    |    |         |         +--- org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0 (*)
-|    |    |         |         \--- org.jetbrains.kotlinx:kotlinx-io-core:0.6.0 -> 0.7.0 (*)
-|    |    |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
+|    |    |         |         \--- org.jetbrains.kotlinx:kotlinx-io-core:0.6.0 -> 0.8.0 (*)
+|    |    |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
 |    |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
 |    +--- project :data:persistence:flashback
 |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:2.2.20 (*)
@@ -1875,46 +1873,46 @@ productionReleaseRuntimeClasspath - Resolved configuration for runtime for varia
 |    \--- project :core:configuration (*)
 +--- project :data:network:flashback (*)
 +--- project :data:network:flashback_news
-|    +--- io.ktor:ktor-client-okhttp:3.2.3 (*)
-|    +--- com.squareup.okhttp3:logging-interceptor:5.0.0 (*)
-|    +--- com.squareup.okhttp3:okhttp-dnsoverhttps:5.0.0 (*)
+|    +--- io.ktor:ktor-client-okhttp:3.3.0 (*)
+|    +--- com.squareup.okhttp3:logging-interceptor:5.1.0 (*)
+|    +--- com.squareup.okhttp3:okhttp-dnsoverhttps:5.1.0 (*)
 |    +--- org.jetbrains.kotlin:kotlin-stdlib:2.2.20 (*)
 |    +--- io.insert-koin:koin-core:4.1.0 (*)
 |    +--- project :infrastructure (*)
 |    +--- project :core:configuration (*)
-|    +--- io.ktor:ktor-client-core:3.2.3 (*)
-|    +--- io.ktor:ktor-client-logging:3.2.3 (*)
-|    +--- io.ktor:ktor-client-cio:3.2.3 (*)
-|    +--- io.ktor:ktor-client-content-negotiation:3.2.3 (*)
-|    +--- io.ktor:ktor-serialization-kotlinx-json:3.2.3 (*)
+|    +--- io.ktor:ktor-client-core:3.3.0 (*)
+|    +--- io.ktor:ktor-client-logging:3.3.0 (*)
+|    +--- io.ktor:ktor-client-cio:3.3.0 (*)
+|    +--- io.ktor:ktor-client-content-negotiation:3.3.0 (*)
+|    +--- io.ktor:ktor-serialization-kotlinx-json:3.3.0 (*)
 |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
 +--- project :data:network:rss
-|    +--- io.ktor:ktor-client-okhttp:3.2.3 (*)
-|    +--- com.squareup.okhttp3:logging-interceptor:5.0.0 (*)
-|    +--- com.squareup.okhttp3:okhttp-dnsoverhttps:5.0.0 (*)
+|    +--- io.ktor:ktor-client-okhttp:3.3.0 (*)
+|    +--- com.squareup.okhttp3:logging-interceptor:5.1.0 (*)
+|    +--- com.squareup.okhttp3:okhttp-dnsoverhttps:5.1.0 (*)
 |    +--- org.jetbrains.kotlin:kotlin-stdlib:2.2.20 (*)
 |    +--- io.insert-koin:koin-core:4.1.0 (*)
 |    +--- project :infrastructure (*)
 |    +--- project :core:configuration (*)
-|    +--- io.ktor:ktor-client-core:3.2.3 (*)
-|    +--- io.ktor:ktor-client-logging:3.2.3 (*)
-|    +--- io.ktor:ktor-client-cio:3.2.3 (*)
-|    +--- io.ktor:ktor-client-content-negotiation:3.2.3 (*)
-|    +--- io.ktor:ktor-serialization-kotlinx-json:3.2.3 (*)
-|    +--- io.ktor:ktor-serialization-kotlinx-xml:3.2.3
-|    |    \--- io.ktor:ktor-serialization-kotlinx-xml-jvm:3.2.3
+|    +--- io.ktor:ktor-client-core:3.3.0 (*)
+|    +--- io.ktor:ktor-client-logging:3.3.0 (*)
+|    +--- io.ktor:ktor-client-cio:3.3.0 (*)
+|    +--- io.ktor:ktor-client-content-negotiation:3.3.0 (*)
+|    +--- io.ktor:ktor-serialization-kotlinx-json:3.3.0 (*)
+|    +--- io.ktor:ktor-serialization-kotlinx-xml:3.3.0
+|    |    \--- io.ktor:ktor-serialization-kotlinx-xml-jvm:3.3.0
 |    |         +--- org.slf4j:slf4j-api:2.0.17
 |    |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
-|    |         +--- io.ktor:ktor-serialization-kotlinx:3.2.3 (*)
-|    |         +--- io.github.pdvrieze.xmlutil:serialization:0.91.1
-|    |         |    \--- io.github.pdvrieze.xmlutil:serialization-jvm:0.91.1
-|    |         |         +--- io.github.pdvrieze.xmlutil:core:0.91.1
-|    |         |         |    \--- io.github.pdvrieze.xmlutil:core-jvmcommon:0.91.1
-|    |         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
+|    |         +--- io.ktor:ktor-serialization-kotlinx:3.3.0 (*)
+|    |         +--- io.github.pdvrieze.xmlutil:serialization:0.91.2
+|    |         |    \--- io.github.pdvrieze.xmlutil:serialization-jvm:0.91.2
+|    |         |         +--- io.github.pdvrieze.xmlutil:core:0.91.2
+|    |         |         |    \--- io.github.pdvrieze.xmlutil:core-jvmcommon:0.91.2
+|    |         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib:2.2.0 -> 2.2.20 (*)
 |    |         |         |         \--- org.jetbrains.kotlinx:kotlinx-serialization-core:1.8.1 -> 1.9.0 (*)
 |    |         |         +--- org.jetbrains.kotlinx:kotlinx-serialization-core:1.8.1 -> 1.9.0 (*)
-|    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
-|    |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.1.21 -> 2.2.20 (*)
+|    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.0 -> 2.2.20 (*)
+|    |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.10 -> 2.2.20 (*)
 |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
 +--- project :data:persistence:flashback (*)
 +--- project :domain:formula1 (*)
@@ -1970,7 +1968,7 @@ productionReleaseRuntimeClasspath - Resolved configuration for runtime for varia
 |    |    |         |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2 (*)
 |    |    |         |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2 (*)
 |    |    |         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib -> 2.2.20 (*)
-|    |    |         |         |         +--- com.squareup.okio:okio:3.15.0 (*)
+|    |    |         |         |         +--- com.squareup.okio:okio:3.15.0 -> 3.16.0 (*)
 |    |    |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.0 -> 2.2.20 (c)
 |    |    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.0 -> 2.2.20 (*)
 |    |    |         +--- io.coil-kt.coil3:coil-compose-core:3.3.0
@@ -1991,7 +1989,7 @@ productionReleaseRuntimeClasspath - Resolved configuration for runtime for varia
 |    |    |         |         +--- androidx.core:core-ktx:1.15.0 -> 1.17.0 (*)
 |    |    |         |         +--- io.coil-kt.coil3:coil-core:3.3.0 (*)
 |    |    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.0 -> 2.2.20 (*)
-|    |    |         +--- io.ktor:ktor-client-core:3.1.0 -> 3.2.3 (*)
+|    |    |         +--- io.ktor:ktor-client-core:3.1.0 -> 3.3.0 (*)
 |    |    |         \--- org.jetbrains.kotlin:kotlin-stdlib:2.2.0 -> 2.2.20 (*)
 |    |    +--- project :core:preferences (*)
 |    |    +--- project :presentation:style (*)
@@ -2268,11 +2266,11 @@ productionReleaseRuntimeClasspath - Resolved configuration for runtime for varia
 |    +--- org.jetbrains.compose.material3.adaptive:adaptive-layout:1.1.2 (*)
 |    +--- org.jetbrains.compose.material3.adaptive:adaptive-navigation:1.1.2 (*)
 |    +--- org.jetbrains.compose.ui:ui-backhandler:1.8.2 (*)
-|    +--- io.ktor:ktor-client-core:3.2.3 (*)
-|    +--- io.ktor:ktor-client-logging:3.2.3 (*)
-|    +--- io.ktor:ktor-client-cio:3.2.3 (*)
-|    +--- io.ktor:ktor-client-content-negotiation:3.2.3 (*)
-|    +--- io.ktor:ktor-serialization-kotlinx-xml:3.2.3 (*)
+|    +--- io.ktor:ktor-client-core:3.3.0 (*)
+|    +--- io.ktor:ktor-client-logging:3.3.0 (*)
+|    +--- io.ktor:ktor-client-cio:3.3.0 (*)
+|    +--- io.ktor:ktor-client-content-negotiation:3.3.0 (*)
+|    +--- io.ktor:ktor-serialization-kotlinx-xml:3.3.0 (*)
 |    +--- com.mohamedrejeb.ksoup:ksoup-html:0.6.0 (*)
 |    +--- org.jetbrains.compose.components:components-resources:1.8.2 (*)
 |    +--- project :core:configuration (*)
@@ -2596,6 +2594,6 @@ productionReleaseRuntimeClasspath - Resolved configuration for runtime for varia
 
 A web-based, searchable dependency report is available by adding the --scan option.
 
-BUILD SUCCESSFUL in 7s
+BUILD SUCCESSFUL in 16s
 5 actionable tasks: 1 executed, 4 up-to-date
 Configuration cache entry stored.
