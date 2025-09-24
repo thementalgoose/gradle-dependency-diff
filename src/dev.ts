@@ -1,6 +1,5 @@
 import { argv } from "process";
 import { parseOutput } from "./processor/input-parser";
-import { diff } from "util";
 import { merge } from "./processor/merger";
 import { output } from "./processor/output";
 
@@ -14,7 +13,8 @@ async function main() {
 
     let merger = merge(before, after);
 
-    output(merger);
+    let result = output(merger);
+    console.log(result);
 }
 
 main();

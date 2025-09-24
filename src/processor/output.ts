@@ -1,34 +1,39 @@
 import { Addition } from "../models/dependency-change.model";
 import { After, Before, DependencyTree, Node } from "../models/dependency-tree.model";
-import { space } from "../utils/stringutils";
+import { space } from "../utils/string.utils";
 
 export function output(
     models: DependencyTree[],
-    printout: (string) => void = x => { console.log(x); },
     index: number = 0
 ) { 
+    if (!containsChildrenWithDiff(models)) { 
+        return "";
+    }
+    let returnOutput = "";
     for (let x of models) {
         if (x instanceof Node) { 
             if (x.before_version != x.after_version) {
-                printout(` |${space(index)}- ${x.name}:${x.after_version} -> ${x.before_version}`);
+                returnOutput += ` |${space(index)}- ${x.name}:${x.before_version} -> ${x.after_version}\n`;
                 // if (index != 0) { 
-                //     output(x.children, printout, index + 1);
+                //     output(x.children, index + 1);
                 // }
             } else if (containsChildrenWithDiff(x.children)) { 
-                printout(` |${space(index)}- ${x.name}`);
-                output(x.children, printout, index + 1);
+                returnOutput += ` |${space(index)}- ${x.name}\n`;
+                returnOutput += output(x.children, index + 1);
             }
         }
         if (x instanceof Before) { 
-            printout(`-|${space(index)}- ${x.name}:${x.before_version}`);
-            output(x.removed, printout, index + 1);
+            returnOutput += `-|${space(index)}- ${x.name}:${x.before_version}\n`;
+            returnOutput += output(x.removed, index + 1);
         }
         if (x instanceof After) { 
-            printout(`+|${space(index)}- ${x.name}:${x.after_version}`);
-            output(x.added, printout, index + 1);
+            returnOutput += `+|${space(index)}- ${x.name}:${x.after_version}\n`;
+            returnOutput += output(x.added, index + 1);
         }
     }
+    return returnOutput;
 }
+
 
 function containsChildrenWithDiff(models: DependencyTree[]): boolean { 
     let returnValue = false;

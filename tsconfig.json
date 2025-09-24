@@ -5,12 +5,16 @@
     "lib": [
       "es6"
     ],
-    "outDir": "./lib",
-    "rootDir": "./src",
-    "declaration": true,
-    "strict": true,
+    "outDir": "./lib/",
     "noImplicitAny": false,
+    "strictNullChecks": false,
     "esModuleInterop": true
   },
-  "exclude": ["__test__", "lib", "node_modules"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "lib", 
+    "node_modules"
+  ]
 }

@@ -5,12 +5,13 @@
   "description": "Provides a comparison report of transitive dependencies for new maven dependencies",
   "scripts": {
     "build": "tsc && ncc build",
+    "build:test": "tsc test/**/*.ts --outDir compiled-test/",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
-    "dev:eg1": "tsc && node lib/dev.js test-assets/eg1-before.txt test-assets/eg1-after.txt",
-    "dev:eg2": "tsc && node lib/dev.js test-assets/eg2-before.txt test-assets/eg2-after.txt",
-    "dev:eg3": "tsc && node lib/dev.js test-assets/eg3-before.txt test-assets/eg3-after.txt",
-    "dev:eg4": "tsc && node lib/dev.js test-assets/eg4-before.txt test-assets/eg4-after.txt"
+    "dev:eg1": "tsc && node lib/dev.js test/assets/eg1-before.txt test/assets/eg1-after.txt",
+    "dev:eg2": "tsc && node lib/dev.js test/assets/eg2-before.txt test/assets/eg2-after.txt",
+    "dev:eg3": "tsc && node lib/dev.js test/assets/eg3-before.txt test/assets/eg3-after.txt",
+    "dev:eg4": "tsc && node lib/dev.js test/assets/eg4-before.txt test/assets/eg4-after.txt"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,9 @@
   },
   "devDependencies": {
     "@types/node": "^24.5.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "assert": "^2.0.0",
+    "chai": "^4.3.4",
+    "mocha": "^11.0.1"
   }
 }

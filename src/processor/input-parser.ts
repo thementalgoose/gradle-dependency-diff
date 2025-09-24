@@ -1,6 +1,6 @@
 import { version } from "os";
 import { Dependency } from "../models/dependency.model";
-import { readFile } from "../utils/fileutils";
+import { readFile } from "../utils/file.utils";
 
 /**
  * Map the :app:dependencies output into a data structure we can worth with
@@ -9,7 +9,6 @@ import { readFile } from "../utils/fileutils";
  * @returns 
  */
 export function parseOutput(filename: string): Dependency[] {
-    console.log(`Loading ${filename}`);
     let lines = readFile(filename)
         .filter(x => x.startsWith("|") || x.startsWith("\\") || x.startsWith("+"));
 
