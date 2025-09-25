@@ -9,7 +9,7 @@ name: Generate Release
          type: string
 
 permissions:
-  deployments: write
+  contents: write
 
 jobs:
   generate_release: 
