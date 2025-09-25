@@ -8,6 +8,9 @@ name: Generate Release
          default: ''
          type: string
 
+permissions:
+  deployments: write
+
 jobs:
   generate_release: 
     runs-on: ubuntu-latest  
