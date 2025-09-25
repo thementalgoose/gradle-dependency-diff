@@ -37,6 +37,7 @@ jobs:
       - name: Checkout temporary branch
         run: |
           git checkout -b release-tagging-branch
+          git add -A lib/ -f
           git add -A dist/ -f
           git commit -am "Release ${{ inputs.tag }}"
       - name: Create tag
