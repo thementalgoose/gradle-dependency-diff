@@ -1,5 +1,8 @@
 # Gradle Dependency Diff
 
+> [!INFORMATION]
+> Work in progress!
+
 > Help spot transitive dependency updates across the project
 
 A small github action designed for android projects which will analyse the gradle dependency graph of a base branch and a target branch and highlight any differences between the two. 
@@ -27,7 +30,7 @@ A small github action designed for android projects which will analyse the gradl
 #  Run the diff report
 - name: Generate dependency diff
   id: diff
-  uses: thementalgoose/gradle-dependency-diff@v1
+  uses: thementalgoose/gradle-dependency-diff@v0
   with: 
     before: before.txt
     after: after.txt
