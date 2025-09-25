@@ -52,6 +52,7 @@ async function run(): Promise<boolean> {
 
     } catch (error: any) {
         // Handle errors and indicate failure
+        console.error(error);
         core.setFailed(error.message);
     }
 

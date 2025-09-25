@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "description": "Provides a comparison report of transitive dependencies for new maven dependencies",
+  "main": "lib/main.js",
   "scripts": {
-    "build": "tsc",
+    "start": "node lib/main.js",
+    "build": "tsc && ncc build",
     "build:test": "tsc test/**/*.ts --outDir compiled-test/",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
@@ -29,6 +31,7 @@
     "@actions/github": "^6.0.1"
   },
   "devDependencies": {
+    "@zeit/ncc": "^0.20.4",
     "@types/node": "^24.5.2",
     "typescript": "^5.9.2",
     "assert": "^2.0.0",
