@@ -6,7 +6,7 @@
   "main": "lib/main.js",
   "scripts": {
     "start": "node lib/main.js",
-    "build": "tsc && ncc build",
+    "build": "tsc",
     "build:test": "tsc test/**/*.ts --outDir compiled-test/",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
