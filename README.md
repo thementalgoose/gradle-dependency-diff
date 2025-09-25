@@ -77,14 +77,15 @@ A small github action designed for android projects which will analyse the gradl
 
 Example: I update `androidx.window:window` from 1.4.0 to 1.5.0 in an android project
 
-```diff
- |- com.squareup.okhttp3:okhttp:4.9.0 -> 4.10.0
+```diff |- com.squareup.okhttp3:okhttp:4.9.0 -> 4.10.0
  |- androidx.core:core-ktx:1.6.0 -> 1.7.0
  |- com.google.android.material:material
-+| - androidx.annotation:annotation:1.2.0
-+| - androidx.core:core:1.7.0
-+| - androidx.transition:transition:1.2.0
-+|  - androidx.annotation:annotation:1.2.0
-+|  - androidx.core:core:1.7.0
+ |  - androidx.annotation:annotation:1.1.0 -> 1.2.0
+ |  - androidx.transition:transition
+ |    - androidx.annotation:annotation:1.1.0 -> 1.2.0
+ |    - androidx.core:core:1.6.0 -> 1.7.0
+-|  - androidx.core:core:1.6.0
 +|- com.google.guava:guava:30.1-jre
++|  - com.google.guava:failureaccess:1.0.1
++|  - com.google.code.findbugs:jsr305:3.0.2
 ```
