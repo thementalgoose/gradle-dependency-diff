@@ -10,7 +10,7 @@ import { readFile } from "../utils/file.utils";
  */
 export function parseOutput(filename: string): Dependency[] {
     let lines = readFile(filename)
-        .filter(x => x.startsWith("|") || x.startsWith("\\") || x.startsWith("+"));
+        .filter(x => x.trim().startsWith("|") || x.trim().startsWith("\\") || x.trim().startsWith("+"));
 
     return mapDependencies(lines, 0);
 }
@@ -68,7 +68,7 @@ function lengthOfDependencies(dependencies: Dependency[]): number {
     return total;
 }
 
-function getIndentation(line: string): number { 
+export function getIndentation(line: string): number { 
     return Math.round(Math.floor(line.indexOf("---") / 5.0))
 }
 

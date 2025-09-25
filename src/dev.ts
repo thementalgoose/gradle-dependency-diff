@@ -1,5 +1,5 @@
 import { argv } from "process";
-import { parseOutput } from "./processor/input-parser";
+import { getIndentation, parseOutput } from "./processor/input-parser";
 import { merge } from "./processor/merger";
 import { output } from "./processor/output";
 
