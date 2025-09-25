@@ -1,5 +1,7 @@
 name: 'Dependency Diffs'
 description: 'Output the dependency differences between two branches'
+icon: 'info'
+color: 'purple'
 inputs:
   before:
     description: Path to the file that contains the output diff before any dependency updates
