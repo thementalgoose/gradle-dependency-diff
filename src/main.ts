@@ -1,4 +1,4 @@
-import core from '@actions/core';
+import * as core from '@actions/core';
 import { parseOutput } from './processor/input-parser';
 import { merge } from './processor/merger';
 import { output } from './processor/output';
