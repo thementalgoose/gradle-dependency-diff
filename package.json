@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "description": "Provides a comparison report of transitive dependencies for new maven dependencies",
-  "main": "dist/index.js",
+  "main": "lib/main.js",
   "scripts": {
     "start": "node dist/index.js",
-    "build": "tsc && export NODE_OPTIONS=--openssl-legacy-provider && ncc build",
+    "build": "tsc &&  export NODE_OPTIONS=--openssl-legacy-provider && ncc build",
     "build:test": "tsc test/**/*.ts --outDir compiled-test/",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
