@@ -7,6 +7,10 @@
 
 A small github action designed for android projects which will analyse the gradle dependency graph of a base branch and a target branch and highlight any differences between the two. 
 
+<details>
+
+<summary>Draft</summary>
+
 ### Setup 
 
 ```yml
@@ -92,3 +96,5 @@ Example: I update `androidx.window:window` from 1.4.0 to 1.5.0 in an android pro
 +|  - com.google.guava:failureaccess:1.0.1
 +|  - com.google.code.findbugs:jsr305:3.0.2
 ```
+
+</details>
