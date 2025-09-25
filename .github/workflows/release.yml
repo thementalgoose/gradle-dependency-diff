@@ -19,6 +19,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: npm install
+        run: |
+          npm install
       - name: Generate build
         run: | 
           npm run build
