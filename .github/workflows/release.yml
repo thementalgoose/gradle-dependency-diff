@@ -2,11 +2,13 @@ name: Generate Release
 'on':
   workflow_dispatch:
     inputs: 
-       tag: 
-         description: 'Release tag'
-         required: true
-         default: ''
-         type: string
+      tag: 
+        description: 'Release tag'
+        required: true
+        default: ''
+        type: string
+        
+run-name: Generate Release${{ inputs.tag }}
 
 permissions:
   contents: write
