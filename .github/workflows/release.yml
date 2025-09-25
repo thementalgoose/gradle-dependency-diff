@@ -8,7 +8,7 @@ name: Generate Release
         default: ''
         type: string
         
-run-name: Generate Release${{ inputs.tag }}
+run-name: Generate Release - ${{ inputs.tag }}
 
 permissions:
   contents: write
