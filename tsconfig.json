@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "commonjs",
+    "module": "system",
     "lib": [
       "es6"
     ],
     "outDir": "./lib/",
+    "outFile": "./lib/main.js",
     "noImplicitAny": false,
     "strictNullChecks": false,
     "esModuleInterop": true
