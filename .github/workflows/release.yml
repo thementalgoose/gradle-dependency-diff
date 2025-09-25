@@ -42,7 +42,7 @@ jobs:
           git tag ${{ inputs.tag }}
       - name: Push tag
         run: | 
-          git push origin ${{ inputs.tag }}
+          git push origin tag ${{ inputs.tag }}
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
