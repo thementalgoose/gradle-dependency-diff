@@ -3,8 +3,13 @@ name: Generate Release
   workflow_dispatch:
     inputs: 
       tag: 
-        description: 'Release tag'
+        description: 'Release tag (ie. "v2.0.0")'
         required: true
+        default: ''
+        type: string
+      tag_major: 
+        description: 'Release tag major (ie. "v2")'
+        required: false
         default: ''
         type: string
       pre_release:
@@ -12,6 +17,7 @@ name: Generate Release
         required: true
         default: false
         type: boolean
+      
         
 run-name: Generate Release - ${{ inputs.tag }}
 
@@ -48,9 +54,17 @@ jobs:
       - name: Create tag
         run: | 
           git tag ${{ inputs.tag }}
+      - name: Create generic
+        if: ${{ inputs.pre_release == false && inputs.tag_major != '' }}
+        run: | 
+          git tag ${{ inputs.tag_major }}
       - name: Push tag
         run: | 
           git push origin tag ${{ inputs.tag }}
+      - name: Push major tag
+        if: ${{ inputs.pre_release == false && inputs.tag_major != '' }}
+        run: | 
+          git push origin tag ${{ inputs.tag_major }}
       - name: Create Release
         if: ${{ inputs.pre_release == false }}
         env:
