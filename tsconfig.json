@@ -7,8 +7,9 @@
     ],
     "outDir": "./lib",
     "rootDir": "./src",
+    "declaration": true,
+    "strict": true,
     "noImplicitAny": false,
-    "strictNullChecks": false,
     "esModuleInterop": true
   },
   "include": [

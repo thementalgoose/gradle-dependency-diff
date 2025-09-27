@@ -1,20 +1,19 @@
-import { argv } from "process";
-import { getIndentation, parseOutput } from "./processor/input-parser";
-import { merge } from "./processor/merger";
-import { output } from "./processor/output";
+import {argv} from 'process'
+import {getIndentation, parseOutput} from './processor/input-parser'
+import {merge} from './processor/merger'
+import {output} from './processor/output'
 
-async function main() { 
+async function main() {
+  let file1 = argv[2]
+  let file2 = argv[3]
 
-    let file1 = argv[2];
-    let file2 = argv[3];
+  let before = parseOutput(file1)
+  let after = parseOutput(file2)
 
-    let before = parseOutput(file1);
-    let after = parseOutput(file2);
+  let merger = merge(before, after)
 
-    let merger = merge(before, after);
-
-    let result = output(merger);
-    console.log(result);
+  let result = output(merger)
+  console.log(result)
 }
 
-main();
+main()

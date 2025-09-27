@@ -1,61 +1,62 @@
-import { Addition } from "../models/dependency-change.model";
-import { After, Before, DependencyTree, Node } from "../models/dependency-tree.model";
-import { space } from "../utils/string.utils";
+import {Addition} from '../models/dependency-change.model'
+import {
+  After,
+  Before,
+  DependencyTree,
+  Node
+} from '../models/dependency-tree.model'
+import {space} from '../utils/string.utils'
 
-export function output(
-    models: DependencyTree[],
-    index: number = 0
-) { 
-    if (!containsChildrenWithDiff(models)) { 
-        return "";
+export function output(models: DependencyTree[], index: number = 0) {
+  if (!containsChildrenWithDiff(models)) {
+    return ''
+  }
+  let returnOutput = ''
+  for (let x of models) {
+    if (x instanceof Node) {
+      if (x.before_version != x.after_version) {
+        returnOutput += ` |${space(index)}- ${x.name}:${x.before_version} -> ${x.after_version}\n`
+        // if (index != 0) {
+        //     output(x.children, index + 1);
+        // }
+      } else if (containsChildrenWithDiff(x.children)) {
+        returnOutput += ` |${space(index)}- ${x.name}\n`
+        returnOutput += output(x.children, index + 1)
+      }
     }
-    let returnOutput = "";
-    for (let x of models) {
-        if (x instanceof Node) { 
-            if (x.before_version != x.after_version) {
-                returnOutput += ` |${space(index)}- ${x.name}:${x.before_version} -> ${x.after_version}\n`;
-                // if (index != 0) { 
-                //     output(x.children, index + 1);
-                // }
-            } else if (containsChildrenWithDiff(x.children)) { 
-                returnOutput += ` |${space(index)}- ${x.name}\n`;
-                returnOutput += output(x.children, index + 1);
-            }
-        }
-        if (x instanceof Before) { 
-            returnOutput += `-|${space(index)}- ${x.name}:${x.before_version}\n`;
-            returnOutput += output(x.removed, index + 1);
-        }
-        if (x instanceof After) { 
-            returnOutput += `+|${space(index)}- ${x.name}:${x.after_version}\n`;
-            returnOutput += output(x.added, index + 1);
-        }
+    if (x instanceof Before) {
+      returnOutput += `-|${space(index)}- ${x.name}:${x.before_version}\n`
+      returnOutput += output(x.removed, index + 1)
     }
-    return returnOutput;
+    if (x instanceof After) {
+      returnOutput += `+|${space(index)}- ${x.name}:${x.after_version}\n`
+      returnOutput += output(x.added, index + 1)
+    }
+  }
+  return returnOutput
 }
 
-
-function containsChildrenWithDiff(models: DependencyTree[]): boolean { 
-    let returnValue = false;
-    for (let x of models) { 
-        if (x instanceof Node) { 
-            if (x.after_version != x.before_version) { 
-                returnValue = returnValue || true;
-            }
-            if (x.children.length == 0) { 
-                returnValue = returnValue || false;
-            }
-            let subChanges = containsChildrenWithDiff(x.children);
-            if (subChanges) {
-                returnValue = returnValue || true;
-            }
-        }
-        if (x instanceof Before) {
-            returnValue = returnValue || true;
-        }
-        if (x instanceof After) {
-            returnValue = returnValue || true;
-        }
+function containsChildrenWithDiff(models: DependencyTree[]): boolean {
+  let returnValue = false
+  for (let x of models) {
+    if (x instanceof Node) {
+      if (x.after_version != x.before_version) {
+        returnValue = returnValue || true
+      }
+      if (x.children.length == 0) {
+        returnValue = returnValue || false
+      }
+      let subChanges = containsChildrenWithDiff(x.children)
+      if (subChanges) {
+        returnValue = returnValue || true
+      }
     }
-    return returnValue;
+    if (x instanceof Before) {
+      returnValue = returnValue || true
+    }
+    if (x instanceof After) {
+      returnValue = returnValue || true
+    }
+  }
+  return returnValue
 }

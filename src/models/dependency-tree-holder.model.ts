@@ -1,24 +1,21 @@
-import { DependencyTree } from "./dependency-tree.model";
+import {DependencyTree} from './dependency-tree.model'
 
-export class DependencyTreeHolder { 
+export class DependencyTreeHolder {
+  public all: DependencyTree[]
 
-    public all: DependencyTree[];
+  constructor(all: DependencyTree[]) {
+    this.all = all
+  }
 
-    constructor(
-        all: DependencyTree[]
-    ) { 
-        this.all = all;
-    }
+  getAdditions(): DependencyTree[] {
+    return this.all
+  }
 
-    getAdditions(): DependencyTree[] { 
-        return this.all;
-    }
+  getDeletions(): DependencyTree[] {
+    return this.all
+  }
 
-    getDeletions(): DependencyTree[] { 
-        return this.all;
-    }
-
-    getDifferences(): DependencyTree[] { 
-        return this.all;
-    }
+  getDifferences(): DependencyTree[] {
+    return this.all
+  }
 }

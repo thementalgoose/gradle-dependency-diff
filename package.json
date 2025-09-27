@@ -6,7 +6,7 @@
   "main": "lib/main.js",
   "scripts": {
     "start": "node dist/index.js",
-    "build": "tsc &&  export NODE_OPTIONS=--openssl-legacy-provider && ncc build",
+    "build": "tsc && ncc build",
     "build:test": "tsc test/**/*.ts --outDir compiled-test/",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
@@ -29,13 +29,13 @@
   "homepage": "https://github.com/thementalgoose/gradle-dependency-diff",
   "dependencies": {
     "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.1",
-    "systemjs": "^6.15.1"
+    "@actions/github": "^6.0.1"
   },
   "devDependencies": {
     "@types/node": "^24.5.2",
     "@vercel/ncc": "^0.38.4",
     "assert": "^2.0.0",
+    "prettier": "^3.6.2",
     "chai": "^4.3.4",
     "mocha": "^11.0.1",
     "typescript": "^5.9.2"
