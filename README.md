@@ -109,7 +109,7 @@ Example: I update `androidx.window:window` from 1.4.0 to 1.5.0 in a sample andro
  |    - :presentation:strings
  |      - androidx.window:window:1.4.0 -> 1.5.0
  |- :presentation:ui
- |  - androidx.window:window:1.4.0 -> 1.5.0
+-|  - androidx.window:window:1.4.0 -> 1.5.0
  |- :widgets
 +|  - androidx.window:window:1.4.0 -> 1.5.0
 ```
