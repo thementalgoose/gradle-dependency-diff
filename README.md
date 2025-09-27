@@ -1,6 +1,6 @@
 # Gradle Dependency Diff
 
-> [!INFORMATION]
+> [!WARNING]
 > Work in progress!
 
 > Help spot transitive dependency updates across the project
