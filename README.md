@@ -11,7 +11,7 @@ Gradle projects are built on a tree of dependencies and often have shared transi
 ```yml
 - name: Generate dependency diff
   id: diff
-  uses: thementalgoose/gradle-dependency-diff@v1
+  uses: thementalgoose/gradle-dependency-diff@v2
   with:
     before: before.txt
     after: after.txt
@@ -66,7 +66,7 @@ Gradle projects are built on a tree of dependencies and often have shared transi
 #  Generate the diff
 - name: Generate dependency diff
   id: diff
-  uses: thementalgoose/gradle-dependency-diff@v1
+  uses: thementalgoose/gradle-dependency-diff@v2
   with:
     before: before.txt
     after: after.txt
