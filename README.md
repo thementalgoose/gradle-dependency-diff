@@ -19,7 +19,7 @@ Gradle projects are built on a tree of dependencies and often have shared transi
     output_to_file_name: diff.txt
 ```
 
-<img src="resources/example.jpg" width="650" />
+<img src="resources/example.png" width="650" />
 
 ### Parameters
 
