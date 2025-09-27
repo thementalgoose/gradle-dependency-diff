@@ -2,7 +2,7 @@ import * as core from '@actions/core'
 import {parseOutput} from './processor/input-parser'
 import {merge} from './processor/merger'
 import {output} from './processor/output'
-import { writeFile } from './utils/file.utils'
+import {writeFile} from './utils/file.utils'
 
 export interface Inputs {
   before: string
@@ -27,9 +27,7 @@ async function run(): Promise<boolean> {
 
     // Read input files into a dependencies structure
     core.startGroup('Reading files')
-    core.info(`Reading ${inputs.before}`);
     let beforeDeps = parseOutput(inputs.before)
-    core.info(`Reading ${inputs.after}`);
     let afterDeps = parseOutput(inputs.after)
     core.endGroup()
 
@@ -45,23 +43,22 @@ async function run(): Promise<boolean> {
 
     let differenceFound = result != ''
 
-    if (inputs.outputToFile) { 
-      core.startGroup(`Saving to ${inputs.outputToFileName}`)
-      writeFile(inputs.outputToFileName, result);
-      core.endGroup();
+    if (inputs.outputToFile) {
+      core.startGroup(`Saving to '${inputs.outputToFileName}'`)
+      writeFile(inputs.outputToFileName, result)
+      core.endGroup()
     }
 
-    core.startGroup("Report printout")
+    core.startGroup('Report printout')
     console.log('================================================')
     console.log('         Dependency difference report')
     console.log('================================================')
     console.log(result)
     console.log('================================================')
-    core.endGroup();
-    
+    core.endGroup()
+
     core.setOutput('is_difference_found', differenceFound)
     core.setOutput('result', result)
-
   } catch (error: any) {
     // Handle errors and indicate failure
     console.error(error)
