@@ -7,6 +7,11 @@ name: Generate Release
         required: true
         default: ''
         type: string
+      pre_release:
+        description: 'Is Pre Release'
+        required: true
+        default: false
+        type: boolean
         
 run-name: Generate Release - ${{ inputs.tag }}
 
@@ -47,6 +52,7 @@ jobs:
         run: | 
           git push origin tag ${{ inputs.tag }}
       - name: Create Release
+        if: ${{ inputs.pre_release != 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ inputs.tag }}
@@ -55,4 +61,15 @@ jobs:
               --repo="$GITHUB_REPOSITORY" \
               --title="$tag" \
               --generate-notes
+      - name: Create Pre Release
+        if: ${{ inputs.pre_release == 'true' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ inputs.tag }}
+        run: |
+          gh release create "$tag" \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="$tag" \
+              --generate-notes
+              --prerelease
           
