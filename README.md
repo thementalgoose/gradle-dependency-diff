@@ -17,6 +17,7 @@ Gradle projects are built on a tree of dependencies and often have shared transi
     after: after.txt
     output_to_file: true
     output_to_file_name: diff.txt
+    post_pr_comment: true
 ```
 
 <img src="resources/example.png" width="650" />
@@ -31,6 +32,8 @@ Gradle projects are built on a tree of dependencies and often have shared transi
 | `after` | true | | Relative path to a file that holds the output of the new dependency output |
 | `output_to_file` | false | `false` | Output the diff to a file |
 | `output_to_file_name` | false | `diff.txt` | The file name that the output diff is saved too. Only generated if output_to_file is true | 
+| `post_pr_comment` | false | `false` | Post Pull Request comment |
+| `repo_token` | false | `${{ github.token }}` | Repo token used for posting a comment on pull requests |
 
 #### Outputs
 
@@ -69,40 +72,7 @@ Gradle projects are built on a tree of dependencies and often have shared transi
     after: after.txt
     output_to_file: true
     output_to_file_name: diff.txt
-
-# Optional
-# =================================================
-# Post the report to the pull request via. a comment
-#  using another action. The example below will clear the comment
-#  if an update removes any differences
-- name: PR comment - Diff found
-  uses: mshick/add-pr-comment@v2
-  if: ${{ steps.diff.outputs.is_difference_found == 'true' }}
-  with:
-    message-id: dependency-difference
-    message: |
-      ### ⚠️ Dependency differences found
-      
-      Differences in the dependency outputs have been introduced in this PR. Please scan the list below and check if any dependencies have had transient dependency updates
-      
-      <details> 
-      <summary>Difference</summary>
-
-      ```diff
-      ${{ steps.diff.outputs.result }}
-      ```
-
-      </details> 
-
-      _Created for commit ${{ github.sha }} at ${{ github.event.repository.pushed_at }}_
-- name: PR comment - No diff found
-  uses: mshick/add-pr-comment@v2
-  if: ${{ steps.diff.outputs.is_difference_found != 'true' }}
-  with:
-    message-id: dependency-difference
-    update-only: true
-    message: |
-      ### ✅ No dependency differences found
+    post_pr_comment: true
 
 # Optional
 # =================================================
@@ -139,7 +109,7 @@ Example: I update `androidx.window:window` from 1.4.0 to 1.5.0 in a sample andro
  |    - :presentation:strings
  |      - androidx.window:window:1.4.0 -> 1.5.0
  |- :presentation:ui
- |  - androidx.window:window:1.4.0 -> 1.5.0
+-|  - androidx.window:window:1.4.0 -> 1.5.0
  |- :widgets
 +|  - androidx.window:window:1.4.0 -> 1.5.0
 ```

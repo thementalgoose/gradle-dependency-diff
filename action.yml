@@ -18,6 +18,14 @@ inputs:
     description: Name of the file to output the diff too. Only outputted if output_to_file is true
     required: true
     default: diff.txt
+  post_pr_comment: 
+    description: Post a pull request comment with the result if this is ran as part of a pull request
+    required: true
+    default: false
+  repo_token:
+    description: "A GitHub token for API access. Defaults to {{ github.token }}."
+    default: "${{ github.token }}"
+    required: true
 outputs:
   is_difference_found:
     description: "If no difference is found"
