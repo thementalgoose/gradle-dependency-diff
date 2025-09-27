@@ -52,7 +52,7 @@ jobs:
         run: | 
           git push origin tag ${{ inputs.tag }}
       - name: Create Release
-        if: ${{ inputs.pre_release != 'true' }}
+        if: ${{ inputs.pre_release == 'false' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ inputs.tag }}
