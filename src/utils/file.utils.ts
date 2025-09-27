@@ -1,9 +1,9 @@
 import * as fs from 'fs'
 
-export const readFile: (filename: string) => string[] = (filename: string) => {
+export const readFile: (filename: string) => string = (filename: string) => {
   console.log(`Reading file ${filename}`)
   let text = fs.readFileSync(filename)
-  return text.toString().split('\n')
+  return text.toString()
 }
 
 export const writeFile: (filename: string, json: string) => boolean = (

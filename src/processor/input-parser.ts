@@ -9,14 +9,17 @@ import {readFile} from '../utils/file.utils'
  * @returns
  */
 export function parseOutput(filename: string): Dependency[] {
-  let lines = readFile(filename).filter(
+  return parseRawOutput(readFile(filename));
+}
+
+export function parseRawOutput(content: string): Dependency[] { 
+  let lines = content.split("\n").filter(
     x =>
       x.trim().startsWith('|') ||
       x.trim().startsWith('\\') ||
       x.trim().startsWith('+')
   )
-
-  return mapDependencies(lines, 0)
+  return mapDependencies(lines)
 }
 
 function createDependency(line: string, children: Dependency[]): Dependency {
@@ -29,7 +32,7 @@ function createDependency(line: string, children: Dependency[]): Dependency {
   }
 }
 
-function mapDependencies(lines: string[], level: number): Dependency[] {
+function mapDependencies(lines: string[], level: number = 0): Dependency[] {
   if (lines.length == 0) {
     return []
   }

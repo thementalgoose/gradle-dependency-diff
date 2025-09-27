@@ -7,14 +7,15 @@
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc && ncc build",
-    "build:test": "tsc test/**/*.ts --outDir compiled-test/",
+    "build:test": "tsc test/*.ts --outDir lib-test/",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
     "dev:eg1": "tsc && node lib/dev.js test/assets/eg1-before.txt test/assets/eg1-after.txt",
     "dev:eg2": "tsc && node lib/dev.js test/assets/eg2-before.txt test/assets/eg2-after.txt",
     "dev:eg3": "tsc && node lib/dev.js test/assets/eg3-before.txt test/assets/eg3-after.txt",
     "dev:eg4": "tsc && node lib/dev.js test/assets/eg4-before.txt test/assets/eg4-after.txt",
-    "cleanup": "rm -rf dist/ && rm -rf lib/"
+    "cleanup": "rm -rf dist/ && rm -rf lib/ && rm -rf lib-test/",
+    "test": "node lib-test/test/test.js"
   },
   "repository": {
     "type": "git",
@@ -32,12 +33,13 @@
     "@actions/github": "^6.0.1"
   },
   "devDependencies": {
+    "@types/chai": "^5.2.2",
     "@types/node": "^24.5.2",
     "@vercel/ncc": "^0.38.4",
     "assert": "^2.0.0",
-    "prettier": "^3.6.2",
     "chai": "^4.3.4",
     "mocha": "^11.0.1",
+    "prettier": "^3.6.2",
     "typescript": "^5.9.2"
   }
 }
