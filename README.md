@@ -1,17 +1,14 @@
 # Gradle Dependency Diff
 
-![GitHub Latest Release)](https://img.shields.io/github/v/release/ptr727/PlexCleaner?logo=github) ![Type](https://img.shields.io/badge/Supported_project-Gradle-blue)[![Pipeline](https://github.com/thementalgoose/gradle-dependency-diff/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/thementalgoose/gradle-dependency-diff/actions/workflows/release.yml)
+![GitHub Latest Release)](https://img.shields.io/github/v/release/thementalgoose/gradle-dependency-diff?logo=github) ![Type](https://img.shields.io/badge/Supported_project-Gradle-blue)[![Pipeline](https://github.com/thementalgoose/gradle-dependency-diff/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/thementalgoose/gradle-dependency-diff/actions/workflows/release.yml)
 
 > Help spot transitive dependency updates across the project
 
-A small github action designed for android projects which will analyse the gradle dependency graph of a base branch and a target branch and highlight any differences between the two. 
+Gradle projects are built on a tree of dependencies and often have shared transitive dependencies brought in. This small github action is designed for android / gradle projects which will merge the gradle dependency graph of a base branch and a target branch and produce a tree of the differences between the two. This can then be reviewed quickly to see what libraries / dependencies are experiencing updates to see if there's any additional testing needed
 
 ### Setup
 
 ```yml
-# This action
-# =================================================
-#  Generate the diff
 - name: Generate dependency diff
   id: diff
   uses: thementalgoose/gradle-dependency-diff@v1
@@ -22,7 +19,7 @@ A small github action designed for android projects which will analyse the gradl
     output_to_file_name: diff.txt
 ```
 
-<img src="resources/example.jpg" width="500" />
+<img src="resources/example.jpg" width="650" />
 
 ### Parameters
 
@@ -54,12 +51,12 @@ A small github action designed for android projects which will analyse the gradl
 - name: Checkout base branch + generate report
   run: |
     git checkout ${{ github.base_ref }}
-    ./gradlew :app:dependencies --configuration liveReleaseRuntimeClasspath >> before.txt
+    ./gradlew :app:dependencies --configuration releaseRuntimeClasspath >> before.txt
 
 - name: Checkout head branch + generate report
   run: |
     git checkout ${{ github.head_ref }}
-    ./gradlew :app:dependencies --configuration liveReleaseRuntimeClasspath >> after.txt
+    ./gradlew :app:dependencies --configuration releaseRuntimeClasspath >> after.txt
 
 # This action
 # =================================================
@@ -76,8 +73,8 @@ A small github action designed for android projects which will analyse the gradl
 # Optional
 # =================================================
 # Post the report to the pull request via. a comment
-#  or use the output_to_file option and archive the file
-#  for viewing later
+#  using another action. The example below will clear the comment
+#  if an update removes any differences
 - name: PR comment - Diff found
   uses: mshick/add-pr-comment@v2
   if: ${{ steps.diff.outputs.is_difference_found == 'true' }}
@@ -98,7 +95,6 @@ A small github action designed for android projects which will analyse the gradl
       </details> 
 
       _Created for commit ${{ github.sha }} at ${{ github.event.repository.pushed_at }}_
-
 - name: PR comment - No diff found
   uses: mshick/add-pr-comment@v2
   if: ${{ steps.diff.outputs.is_difference_found != 'true' }}
@@ -108,6 +104,10 @@ A small github action designed for android projects which will analyse the gradl
     message: |
       ### ✅ No dependency differences found
 
+# Optional
+# =================================================
+# Archive the difference file outputted from the action 
+#  for review later
 - name: Archive dependency diff
   uses: actions/upload-artifact@v4
   with:
@@ -141,5 +141,5 @@ Example: I update `androidx.window:window` from 1.4.0 to 1.5.0 in a sample andro
  |- :presentation:ui
  |  - androidx.window:window:1.4.0 -> 1.5.0
  |- :widgets
- |  - androidx.window:window:1.4.0 -> 1.5.0
++|  - androidx.window:window:1.4.0 -> 1.5.0
 ```
