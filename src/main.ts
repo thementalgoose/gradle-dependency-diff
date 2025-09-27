@@ -94,7 +94,7 @@ function getPrDiffComment(result: string): string {
 Differences in the dependency outputs have been introduced in this PR. Please scan the list below and check if any dependencies have had transient dependency updates
 
 <details> 
-<summary>Difference</summary>
+<summary>View differences here</summary>
 
 \`\`\`diff
 ${result}
