@@ -72,40 +72,7 @@ Gradle projects are built on a tree of dependencies and often have shared transi
     after: after.txt
     output_to_file: true
     output_to_file_name: diff.txt
-
-# Optional
-# =================================================
-# Post the report to the pull request via. a comment
-#  using another action. The example below will clear the comment
-#  if an update removes any differences
-- name: PR comment - Diff found
-  uses: mshick/add-pr-comment@v2
-  if: ${{ steps.diff.outputs.is_difference_found == 'true' }}
-  with:
-    message-id: dependency-difference
-    message: |
-      ### ⚠️ Dependency differences found
-      
-      Differences in the dependency outputs have been introduced in this PR. Please scan the list below and check if any dependencies have had transient dependency updates
-      
-      <details> 
-      <summary>Difference</summary>
-
-      ```diff
-      ${{ steps.diff.outputs.result }}
-      ```
-
-      </details> 
-
-      _Created for commit ${{ github.sha }} at ${{ github.event.repository.pushed_at }}_
-- name: PR comment - No diff found
-  uses: mshick/add-pr-comment@v2
-  if: ${{ steps.diff.outputs.is_difference_found != 'true' }}
-  with:
-    message-id: dependency-difference
-    update-only: true
-    message: |
-      ### ✅ No dependency differences found
+    post_pr_comment: true
 
 # Optional
 # =================================================
