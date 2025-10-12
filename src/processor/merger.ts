@@ -18,10 +18,10 @@ export function merge(
   before: Dependency[],
   after: Dependency[]
 ): DependencyTree[] {
-  let listOfNodes: DependencyTree[] = []
+  let listOfNodes: DependencyTree[] = [];
 
-  let beforeSets = [...new Set(before.map(x => x.name))]
-  let afterSets = [...new Set(after.map(x => x.name))]
+  let beforeSets = before.map(x => x.name);
+  let afterSets = after.map(x => x.name);
 
   let intersection = beforeSets.filter(x => afterSets.includes(x))
   let left_join = beforeSets.filter(x => !afterSets.includes(x))
