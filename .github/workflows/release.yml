@@ -57,6 +57,7 @@ jobs:
       - name: Create generic
         if: ${{ inputs.pre_release == false && inputs.tag_major != '' }}
         run: | 
+          git tag --delete ${{ inputs.tag_major }}
           git tag ${{ inputs.tag_major }}
       - name: Push tag
         run: | 
@@ -64,7 +65,7 @@ jobs:
       - name: Push major tag
         if: ${{ inputs.pre_release == false && inputs.tag_major != '' }}
         run: | 
-          git push origin tag ${{ inputs.tag_major }}
+          git push origin tag ${{ inputs.tag_major }} --force
       - name: Create Release
         if: ${{ inputs.pre_release == false }}
         env:
