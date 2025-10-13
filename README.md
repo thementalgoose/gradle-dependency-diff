@@ -87,29 +87,18 @@ Gradle projects are built on a tree of dependencies and often have shared transi
 
 ### Sample output
 
-Example: I update `androidx.window:window` from 1.4.0 to 1.5.0 in a sample android project
+This example below lists a before + after output of the `./gradlew :dependencies` task and what the generated difference would highlight
+
+| Before | After |
+|---|---|
+| <pre>- com.squareup.okhttp3:okhttp:4.10.0<br/>  - com.squareup.com.squareup.okio:okio:2.8.0<br/>    - org.jetbrains.kotlin:kotlin-stdlib-common:1.5.0<br/>  - org.jetbrains.kotlin:kotlin-stdlib:1.5.0<br/>    - org.jetbrains.kotlin:kotlin-stdlib-common:1.5.0<br/>- androidx.core:core-ktx:1.7.0<br/>  - androidx.annotation:annotation:1.2.0<br/>  - androidx.core:core:1.7.0<br/></pre> | <pre>- com.squareup.okhttp3:okhttp:4.10.0<br/>  - com.squareup.com.squareup.okio:okio:3.0.0<br/>    - org.jetbrains.kotlin:kotlin-stdlib-common:1.5.0<br/>  - org.jetbrains.kotlin:kotlin-stdlib:1.5.0<br/>    - org.jetbrains.kotlin:kotlin-stdlib-common:1.5.0<br/>    - androidx.annotation:annotation:1.2.0<br/> <br/> <br/></pre> | 
 
 ```diff 
- |- androidx.navigation:navigation-fragment-ktx
- |  - androidx.navigation:navigation-fragment
- |    - androidx.slidingpanelayout:slidingpanelayout
- |      - androidx.window:window:1.4.0 -> 1.5.0
- |- androidx.window:window:1.4.0 -> 1.5.0
- |- androidx.compose.material3:material3-window-size-class
- |  - androidx.compose.material3:material3-window-size-class-android
- |    - androidx.window:window:1.4.0 -> 1.5.0
- |- :core:metrics:googleanalytics
- |  - androidx.window:window:1.4.0 -> 1.5.0
- |- :core:metrics:crashlytics
- |  - androidx.window:window:1.4.0 -> 1.5.0
- |- :data:realm
- |  - androidx.window:window:1.4.0 -> 1.5.0
- |  - :domain
- |    - androidx.window:window:1.4.0 -> 1.5.0
- |    - :presentation:strings
- |      - androidx.window:window:1.4.0 -> 1.5.0
- |- :presentation:ui
--|  - androidx.window:window:1.4.0 -> 1.5.0
- |- :widgets
-+|  - androidx.window:window:1.4.0 -> 1.5.0
+ |- com.squareup.okhttp3:okhttp
+ |  - com.squareup.okio:okio:2.8.0 -> 3.0.0
+ |  - org.jetbrains.kotlin:kotlin-stdlib
++|    - androidx.annotation:annotation:1.2.0
+-|- androidx.core:core-ktx:1.7.0
+-|  - androidx.annotation:annotation:1.2.0
+-|  - androidx.core:core:1.7.0
 ```
