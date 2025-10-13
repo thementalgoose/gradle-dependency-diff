@@ -34,6 +34,7 @@ Gradle projects are built on a tree of dependencies and often have shared transi
 | `output_to_file_name` | false | `diff.txt` | The file name that the output diff is saved too. Only generated if output_to_file is true | 
 | `post_pr_comment` | false | `false` | Post Pull Request comment |
 | `repo_token` | false | `${{ github.token }}` | Repo token used for posting a comment on pull requests |
+| `show_removals` | false | `true` | Show removed dependencies in the diff output |
 
 #### Outputs
 

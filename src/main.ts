@@ -13,6 +13,7 @@ export interface Inputs {
   outputToFileName: string
   postPrComment: boolean
   repoToken: string
+  showRemovals: boolean
 }
 
 async function run(): Promise<boolean> {
@@ -24,7 +25,8 @@ async function run(): Promise<boolean> {
       outputToFile: core.getInput('output_to_file') == 'true',
       outputToFileName: core.getInput('output_to_file_name'),
       postPrComment: core.getInput('post_pr_comment') == 'true',
-      repoToken: core.getInput('repo_token')
+      repoToken: core.getInput('repo_token'),
+      showRemovals: core.getInput('show_removals') == 'true'
     }
     
     // Validate inputs
@@ -44,7 +46,7 @@ async function run(): Promise<boolean> {
     
     // Filter out similar data + generate output
     core.startGroup('Generating output')
-    let result = output(merger)
+    let result = output(merger, inputs.showRemovals)
     core.endGroup()
     
     let differenceFound = result != ''
