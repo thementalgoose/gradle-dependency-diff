@@ -20,6 +20,9 @@ jobs:
           npm install
       - name: Generate build
         run: | 
+          npm run build
+      - name: Build tests
+        run: | 
           npm run build:test
       - name: Run tests
         run: | 
