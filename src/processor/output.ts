@@ -7,7 +7,7 @@ import {
 } from '../models/dependency-tree.model'
 import {space} from '../utils/string.utils'
 
-export function output(models: DependencyTree[], index: number = 0) {
+export function output(models: DependencyTree[], index: number = 0): string {
   if (!containsChildrenWithDiff(models)) {
     return ''
   }

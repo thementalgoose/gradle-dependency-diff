@@ -1,7 +1,8 @@
 import { describe, it } from "node:test";
-import { afterList, beforeList, getAfterOutput, getBeforeOutput, mergeLeftList, mergeResult, mergeRightList } from "./assets";
+import { afterList, beforeList, getAfterOutput, getBeforeOutput, mergeLeftList, mergeResult, mergeResultOutput, mergeRightList } from "./assets";
 import { parseRawOutput } from "../src/processor/input-parser";
 import { merge } from "../src/processor/merger";
+import { output } from "../src/processor/output";
 import { assert } from "chai";
 
 describe("Parsing", () => { 
@@ -31,5 +32,14 @@ describe("Merging", () => {
     it("merging two lists results in correct merger", () => {
         let result = merge(mergeLeftList, mergeRightList); 
         assert.equal(JSON.stringify(mergeResult), JSON.stringify(result));
+    });
+})
+
+
+describe("Output", () => { 
+
+    it("output prints out correct diff", () => {
+        let result = output(mergeResult); 
+        assert.equal(result, mergeResultOutput);
     });
 })
