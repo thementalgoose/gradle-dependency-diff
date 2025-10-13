@@ -28,7 +28,6 @@ inputs:
     required: true
   show_removals:
     description: "Show library removals in the difference output"
-    default: "${{ github.token }}"
     required: true
     default: true
 outputs:
