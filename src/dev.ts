@@ -12,7 +12,7 @@ async function main() {
 
   let merger = merge(before, after)
 
-  let result = output(merger)
+  let result = output(merger, true)
   console.log(result)
 }
 
