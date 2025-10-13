@@ -109,11 +109,16 @@ export let mergeResult: DependencyTree[] = [
         new Before("androidx.core:core", "1.7.0", [])
     ])
 ];
-export let mergeResultOutput: string = ` |- com.squareup.okhttp3:okhttp
+export let mergeResultOutputWithRemovals: string = ` |- com.squareup.okhttp3:okhttp
  |  - com.squareup.okio:okio:2.8.0 -> 3.0.0
  |  - org.jetbrains.kotlin:kotlin-stdlib
 +|    - androidx.annotation:annotation:1.2.0
 -|- androidx.core:core-ktx:1.7.0
 -|  - androidx.annotation:annotation:1.2.0
 -|  - androidx.core:core:1.7.0
+`;
+export let mergeResultOutputWithoutRemovals: string = ` |- com.squareup.okhttp3:okhttp
+ |  - com.squareup.okio:okio:2.8.0 -> 3.0.0
+ |  - org.jetbrains.kotlin:kotlin-stdlib
++|    - androidx.annotation:annotation:1.2.0
 `;

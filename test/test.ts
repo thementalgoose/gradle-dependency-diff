@@ -1,5 +1,15 @@
 import { describe, it } from "node:test";
-import { afterList, beforeList, getAfterOutput, getBeforeOutput, mergeLeftList, mergeResult, mergeResultOutput, mergeRightList } from "./assets";
+import { 
+    afterList, 
+    beforeList, 
+    getAfterOutput, 
+    getBeforeOutput, 
+    mergeLeftList, 
+    mergeResult, 
+    mergeResultOutputWithoutRemovals, 
+    mergeResultOutputWithRemovals, 
+    mergeRightList 
+} from "./assets";
 import { parseRawOutput } from "../src/processor/input-parser";
 import { merge } from "../src/processor/merger";
 import { output } from "../src/processor/output";
@@ -38,8 +48,13 @@ describe("Merging", () => {
 
 describe("Output", () => { 
 
-    it("output prints out correct diff", () => {
-        let result = output(mergeResult); 
-        assert.equal(result, mergeResultOutput);
+    it("output prints out correct diff with removals", () => {
+        let result = output(mergeResult, true); 
+        assert.equal(result, mergeResultOutputWithRemovals);
+    });
+
+    it("output prints out correct diff with no removals", () => {
+        let result = output(mergeResult, false); 
+        assert.equal(result, mergeResultOutputWithoutRemovals);
     });
 })

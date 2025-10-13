@@ -7,7 +7,7 @@ import {
 } from '../models/dependency-tree.model'
 import {space} from '../utils/string.utils'
 
-export function output(models: DependencyTree[], index: number = 0): string {
+export function output(models: DependencyTree[], showRemovals: boolean, index: number = 0): string {
   if (!containsChildrenWithDiff(models)) {
     return ''
   }
@@ -21,16 +21,16 @@ export function output(models: DependencyTree[], index: number = 0): string {
         // }
       } else if (containsChildrenWithDiff(x.children)) {
         returnOutput += ` |${space(index)}- ${x.name}\n`
-        returnOutput += output(x.children, index + 1)
+        returnOutput += output(x.children, showRemovals, index + 1)
       }
     }
-    if (x instanceof Before) {
+    if (x instanceof Before && showRemovals) {
       returnOutput += `-|${space(index)}- ${x.name}:${x.before_version}\n`
-      returnOutput += output(x.removed, index + 1)
+      returnOutput += output(x.removed, showRemovals, index + 1)
     }
     if (x instanceof After) {
       returnOutput += `+|${space(index)}- ${x.name}:${x.after_version}\n`
-      returnOutput += output(x.added, index + 1)
+      returnOutput += output(x.added, showRemovals, index + 1)
     }
   }
   return returnOutput
