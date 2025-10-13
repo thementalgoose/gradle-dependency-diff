@@ -26,6 +26,11 @@ inputs:
     description: "A GitHub token for API access. Defaults to {{ github.token }}."
     default: "${{ github.token }}"
     required: true
+  show_removals:
+    description: "Show library removals in the difference output"
+    default: "${{ github.token }}"
+    required: true
+    default: true
 outputs:
   is_difference_found:
     description: "If no difference is found"
