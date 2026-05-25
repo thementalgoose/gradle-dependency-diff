@@ -57,7 +57,7 @@ jobs:
       - name: Create generic
         if: ${{ inputs.pre_release == false && inputs.tag_major != '' }}
         run: | 
-          git tag --delete ${{ inputs.tag_major }}
+          git tag --delete ${{ inputs.tag_major }} || true
           git tag ${{ inputs.tag_major }}
       - name: Push tag
         run: | 
