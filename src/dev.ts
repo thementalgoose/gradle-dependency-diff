@@ -1,7 +1,7 @@
 import {argv} from 'process'
 import {getIndentation, parseOutput} from './processor/input-parser'
 import {merge} from './processor/merger'
-import {output} from './processor/output'
+import {outputDiff, outputList} from './processor/output'
 
 async function main() {
   let file1 = argv[2]
@@ -12,7 +12,12 @@ async function main() {
 
   let merger = merge(before, after)
 
-  let result = output(merger, true)
+  console.log(" == LIST ======================");
+  let list = outputList(merger)
+  console.log(list)
+
+  console.log(" == DIFF ======================");
+  let result = outputDiff(merger, true)
   console.log(result)
 }
 

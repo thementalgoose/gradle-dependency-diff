@@ -2,7 +2,7 @@ import * as core from '@actions/core'
 import * as github from '@actions/github'
 import {parseOutput} from './processor/input-parser'
 import {merge} from './processor/merger'
-import {output} from './processor/output'
+import {outputDiff, outputList} from './processor/output'
 import {writeFile} from './utils/file.utils'
 import { postComment } from './github/comments'
 
@@ -46,7 +46,8 @@ async function run(): Promise<boolean> {
     
     // Filter out similar data + generate output
     core.startGroup('Generating output')
-    let result = output(merger, inputs.showRemovals)
+    let list = outputList(merger)
+    let result = outputDiff(merger, inputs.showRemovals)
     core.endGroup()
     
     let differenceFound = result != ''
@@ -63,7 +64,7 @@ async function run(): Promise<boolean> {
       core.startGroup("Posting github comment");
       let messageId: string = "gradle-dependency-diff";
       if (differenceFound) { 
-        let requestResult = await postComment(inputs.repoToken, messageId, getPrDiffComment(result));
+        let requestResult = await postComment(inputs.repoToken, messageId, getPrDiffComment(Array.from(list), result));
         console.log(`Posting diff comment: ${requestResult}`);
       } else { 
         let requestResult = await postComment(inputs.repoToken, messageId, getPrNoDiffComment());
@@ -89,11 +90,18 @@ async function run(): Promise<boolean> {
   return true
 }
 
-function getPrDiffComment(result: string): string { 
+export function getPrDiffComment(list: string[],result: string): string { 
+  const bullets = list
+    .sort()
+    .map(n => `- ${n}`)
+    .join('\n')
+
   return `
 ### ⚠️ Dependency differences found
 
-Differences in the dependency outputs have been introduced in this PR. Please scan the list below and check if any dependencies have had transient dependency updates
+Differences in the dependency outputs have been introduced in this PR. Below are the high-level dependency names touched in this change:
+
+${bullets}
 
 <details> 
 <summary>View differences here</summary>
@@ -108,10 +116,8 @@ _Created at ${ new Date().toISOString() }_
   `.trim();
 }
 
-function getPrNoDiffComment(): string {
+export function getPrNoDiffComment(): string {
   return `
 ### ✅ No dependency differences found
   `.trim();
 }
-
-run()
