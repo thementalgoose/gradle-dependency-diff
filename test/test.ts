@@ -4,6 +4,7 @@ import {
     beforeList, 
     getAfterOutput, 
     getBeforeOutput, 
+    listResultOutput, 
     mergeLeftList, 
     mergeResult, 
     mergeResultOutputWithoutRemovals, 
@@ -12,8 +13,9 @@ import {
 } from "./assets";
 import { parseRawOutput } from "../src/processor/input-parser";
 import { merge } from "../src/processor/merger";
-import { output } from "../src/processor/output";
+import { outputDiff, outputList } from "../src/processor/output";
 import { assert } from "chai";
+import { getPrDiffComment, getPrNoDiffComment } from "../src/main";
 
 describe("Parsing", () => { 
 
@@ -46,15 +48,58 @@ describe("Merging", () => {
 })
 
 
-describe("Output", () => { 
+describe("Output - Diff", () => { 
 
     it("output prints out correct diff with removals", () => {
-        let result = output(mergeResult, true); 
+        let result = outputDiff(mergeResult, true); 
         assert.equal(result, mergeResultOutputWithRemovals);
     });
 
     it("output prints out correct diff with no removals", () => {
-        let result = output(mergeResult, false); 
+        let result = outputDiff(mergeResult, false); 
         assert.equal(result, mergeResultOutputWithoutRemovals);
     });
+})
+
+
+describe("Output - List", () => { 
+
+    it("output prints out correct list", () => {
+        let result = outputList(mergeResult); 
+        assert.notStrictEqual(Array.from(result), Array.from(listResultOutput));
+    });
+})
+
+describe("Output - PR", () => {
+
+    it("getPrDiffComment includes high-level bullets and the diff block", () => {
+        const expected = `### ⚠️ Dependency differences found
+
+Differences in the dependency outputs have been introduced in this PR. Below are the high-level dependency names touched in this change:
+
+- Something
+
+<details> 
+<summary>View differences here</summary>
+
+\`\`\`diff
+ |- com.squareup.okhttp3:okhttp
+ |  - com.squareup.okio:okio:2.8.0 -> 3.0.0
+ |  - org.jetbrains.kotlin:kotlin-stdlib
++|    - androidx.annotation:annotation:1.2.0
+
+\`\`\`
+
+</details>`;
+
+        const diff = mergeResultOutputWithoutRemovals;
+        const comment = getPrDiffComment(["Something"], diff);
+        assert.include(comment, expected);
+    });
+
+    it("getPrNoDiffComment returns no-diff header", () => {
+        const comment = getPrNoDiffComment();
+        assert.equal(comment, "### ✅ No dependency differences found");
+    });
+
 })

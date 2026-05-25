@@ -122,3 +122,7 @@ export let mergeResultOutputWithoutRemovals: string = ` |- com.squareup.okhttp3:
  |  - org.jetbrains.kotlin:kotlin-stdlib
 +|    - androidx.annotation:annotation:1.2.0
 `;
+
+export let listResultOutput: Set<string> = new Set<string>(
+    ["com.squareup.okio:okio:2.8.0 -> 3.0.0"]
+);

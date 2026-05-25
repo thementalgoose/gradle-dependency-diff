@@ -7,7 +7,39 @@ import {
 } from '../models/dependency-tree.model'
 import {space} from '../utils/string.utils'
 
-export function output(models: DependencyTree[], showRemovals: boolean, index: number = 0): string {
+export function outputList(models: DependencyTree[], index: number = 0): Set<string> { 
+  if (!containsChildrenWithDiff(models)) {
+    return new Set<string>();
+  }
+  let set = new Set<string>();
+  for (let x of models) { 
+    if (x instanceof Node) {
+      if (x.before_version != x.after_version) {
+        set.add(`${x.name}:${x.before_version} -> ${x.after_version}`);
+      } else if (containsChildrenWithDiff(x.children)) {
+        let subSet = outputList(x.children, index + 1);
+        for (let y of Array.from(subSet)) { 
+          set.add(y);
+        }
+      }
+    }
+    if (x instanceof Before) {
+      let subSet = outputList(x.removed, index + 1);
+      for (let y of Array.from(subSet)) { 
+        set.add(y);
+      }
+    }
+    if (x instanceof After) {
+      let subSet = outputList(x.added, index + 1);
+      for (let y of Array.from(subSet)) { 
+        set.add(y);
+      }
+    }
+  }
+  return set;
+}
+
+export function outputDiff(models: DependencyTree[], showRemovals: boolean, index: number = 0): string {
   if (!containsChildrenWithDiff(models)) {
     return ''
   }
@@ -16,21 +48,18 @@ export function output(models: DependencyTree[], showRemovals: boolean, index: n
     if (x instanceof Node) {
       if (x.before_version != x.after_version) {
         returnOutput += ` |${space(index)}- ${x.name}:${x.before_version} -> ${x.after_version}\n`
-        // if (index != 0) {
-        //     output(x.children, index + 1);
-        // }
       } else if (containsChildrenWithDiff(x.children)) {
         returnOutput += ` |${space(index)}- ${x.name}\n`
-        returnOutput += output(x.children, showRemovals, index + 1)
+        returnOutput += outputDiff(x.children, showRemovals, index + 1)
       }
     }
     if (x instanceof Before && showRemovals) {
       returnOutput += `-|${space(index)}- ${x.name}:${x.before_version}\n`
-      returnOutput += output(x.removed, showRemovals, index + 1)
+      returnOutput += outputDiff(x.removed, showRemovals, index + 1)
     }
     if (x instanceof After) {
       returnOutput += `+|${space(index)}- ${x.name}:${x.after_version}\n`
-      returnOutput += output(x.added, showRemovals, index + 1)
+      returnOutput += outputDiff(x.added, showRemovals, index + 1)
     }
   }
   return returnOutput
