@@ -90,10 +90,34 @@ async function run(): Promise<boolean> {
 }
 
 function getPrDiffComment(result: string): string { 
+  // Extract dependency names from the result lines
+  const names = new Set<string>();
+  for (const line of result.split(/\r?\n/)) {
+    if (!line || !line.includes('-')) continue
+    const m = line.match(/-\s+(.+)$/)
+    if (!m) continue
+    const depWithVersion = m[1].trim()
+    // strip trailing version info (last ":<version>" or ":<version> -> <version>")
+    const parts = depWithVersion.split(':')
+    if (parts.length <= 1) {
+      names.add(depWithVersion)
+    } else {
+      const name = parts.slice(0, parts.length - 1).join(':')
+      names.add(name)
+    }
+  }
+
+  const bullets = Array.from(names)
+    .sort()
+    .map(n => `- ${n}`)
+    .join('\n')
+
   return `
 ### ⚠️ Dependency differences found
 
-Differences in the dependency outputs have been introduced in this PR. Please scan the list below and check if any dependencies have had transient dependency updates
+Differences in the dependency outputs have been introduced in this PR. Below are the high-level dependency names touched in this change:
+
+${bullets}
 
 <details> 
 <summary>View differences here</summary>
