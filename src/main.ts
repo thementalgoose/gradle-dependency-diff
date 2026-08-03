@@ -17,6 +17,7 @@ export interface Inputs {
 }
 
 async function run(): Promise<boolean> {
+  console.log("Starting....");
   try {
     // Fetch github action inputs
     const inputs: Inputs = {
