@@ -123,4 +123,6 @@ export function getPrNoDiffComment(): string {
   `.trim();
 }
 
-void run();
+if (require.main === module) {
+  void run();
+}
