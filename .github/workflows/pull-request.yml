@@ -34,6 +34,16 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+      - name: Setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: npm install
+        run: |
+          npm install
+      - name: Generate build
+        run: | 
+          npm run build
       - name: Generate dependency diff
         id: diff
         uses: ./
