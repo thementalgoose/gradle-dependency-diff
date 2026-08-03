@@ -1,4 +1,8 @@
 import { describe, it } from "node:test";
+import { execFileSync } from "node:child_process";
+import { existsSync, mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
 import { 
     afterList, 
     beforeList, 
@@ -69,6 +73,35 @@ describe("Output - List", () => {
         assert.notStrictEqual(Array.from(result), Array.from(listResultOutput));
     });
 })
+
+describe("Action entrypoint", () => {
+
+    it("runs the packaged action and writes an output file", () => {
+        const tempDir = mkdtempSync(join(tmpdir(), "gradle-dependency-diff-"));
+        const outputFile = join(tempDir, "diff.txt");
+
+        try {
+            execFileSync(process.execPath, [resolve(__dirname, "../../dist/index.js")], {
+                cwd: resolve(__dirname, "../.."),
+                env: {
+                    ...process.env,
+                    INPUT_BEFORE: "sample/before.txt",
+                    INPUT_AFTER: "sample/after.txt",
+                    INPUT_OUTPUT_TO_FILE: "true",
+                    INPUT_OUTPUT_TO_FILE_NAME: outputFile,
+                    INPUT_POST_PR_COMMENT: "false",
+                    INPUT_REPO_TOKEN: "dummy",
+                    INPUT_SHOW_REMOVALS: "true",
+                },
+                stdio: "pipe",
+            });
+
+            assert.isTrue(existsSync(outputFile), "Expected the action entrypoint to write the diff output file");
+        } finally {
+            rmSync(tempDir, { recursive: true, force: true });
+        }
+    });
+});
 
 describe("Output - PR", () => {
 
