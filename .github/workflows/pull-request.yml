@@ -36,7 +36,7 @@ jobs:
           fetch-depth: 0
       - name: Generate dependency diff
         id: diff
-        uses: thementalgoose/gradle-dependency-diff@${{ github.sha }}
+        uses: ./
         with:
           before: sample/before.txt
           after: sample/after.txt
