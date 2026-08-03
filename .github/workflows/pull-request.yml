@@ -27,3 +27,24 @@ jobs:
       - name: Run tests
         run: | 
           npm run test
+
+  sample:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Generate dependency diff
+        id: diff
+        uses: thementalgoose/gradle-dependency-diff@${{ github.sha }}
+        with:
+          before: sample/before.txt
+          after: sample/after.txt
+          output_to_file: true
+          output_to_file_name: diff.txt
+          post_pr_comment: true
+      - name: Archive dependency diff
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-diff
+          path: diff.txt
