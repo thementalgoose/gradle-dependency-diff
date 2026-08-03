@@ -16,7 +16,8 @@ export interface Inputs {
   showRemovals: boolean
 }
 
-async function run(): Promise<boolean> {
+export async function run(): Promise<boolean> {
+  console.log("Starting....");
   try {
     // Fetch github action inputs
     const inputs: Inputs = {
@@ -120,4 +121,8 @@ export function getPrNoDiffComment(): string {
   return `
 ### ✅ No dependency differences found
   `.trim();
+}
+
+if (require.main === module) {
+  void run();
 }
