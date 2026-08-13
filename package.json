@@ -30,7 +30,7 @@
   "homepage": "https://github.com/thementalgoose/gradle-dependency-diff",
   "dependencies": {
     "@actions/core": "^2.0.0",
-    "@actions/github": "^7.0.0"
+    "@actions/github": "^9.0.0"
   },
   "devDependencies": {
     "@types/chai": "^5.2.2",
