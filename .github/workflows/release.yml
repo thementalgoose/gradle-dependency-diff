@@ -72,19 +72,23 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ inputs.tag }}
         run: |
+          LATEST_TAG=$(gh release view --json tagName --jq '.tagName')
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
               --title="$tag" \
-              --generate-notes
+              --generate-notes \
+              --notes-start-tag $LATEST_TAG
       - name: Create Pre Release
         if: ${{ inputs.pre_release == true }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ inputs.tag }}
         run: |
+          LATEST_TAG=$(gh release view --json tagName --jq '.tagName')
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
               --title="$tag" \
-              --generate-notes
+              --generate-notes \
+              --notes-start-tag $LATEST_TAG \
               --prerelease
           
