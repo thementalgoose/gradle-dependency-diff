@@ -23,7 +23,7 @@ export function parseRawOutput(content: string): Dependency[] {
 }
 
 function createDependency(line: string, children: Dependency[]): Dependency {
-  if (line.startsWith('+--- project')) {
+  if (isProjectDependency(line)) {
     return new Dependency(stripModuleName(line), '', children)
   } else {
     let name = stripDependencyName(line)
@@ -84,7 +84,15 @@ export function getIndentation(line: string): number {
  * "+--- project :core:configuration (*)"
  */
 function stripModuleName(line: string): string {
+  let match = line.match(/project\s+['"](:[^'"]+)['"]/)
+  if (match) {
+    return match[1]
+  }
   return line.split('project ')[1].replace('(*)', '').trim()
+}
+
+function isProjectDependency(line: string): boolean {
+  return /project\s+['"]?:/.test(line)
 }
 
 /**
@@ -93,8 +101,8 @@ function stripModuleName(line: string): string {
  * "+--- org.jetbrains.kotlin:kotlin-stdlib -> 2.2.20 (*)"
  */
 function stripDependencyName(line: string): string {
-  if (line.indexOf('project :') !== -1) {
-    return line.split('---')[1].replace('project', '').trim()
+  if (isProjectDependency(line)) {
+    return stripModuleName(line)
   }
   let numberOfColons = (line.match(new RegExp(':', 'g')) || []).length
   if (numberOfColons <= 1) {
