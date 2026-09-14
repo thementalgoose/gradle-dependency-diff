@@ -40,6 +40,16 @@ describe("Parsing", () => {
             "Dependency tree not created as expected"
         );
     });
+
+    it("parses nested project dependencies with their full module names", () => {
+        const parsed = parseRawOutput(`
++--- project ':core:metrics:analytics'
+|    \\--- project ':feature:drivers'
+        `.trim());
+
+        assert.equal(parsed[0].name, ":core:metrics:analytics");
+        assert.equal(parsed[0].children[0].name, ":feature:drivers");
+    });
 });
 
 

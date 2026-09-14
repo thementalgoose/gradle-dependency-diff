@@ -14,6 +14,7 @@
     "dev:eg2": "tsc && node lib/dev.js test/assets/eg2-before.txt test/assets/eg2-after.txt",
     "dev:eg3": "tsc && node lib/dev.js test/assets/eg3-before.txt test/assets/eg3-after.txt",
     "dev:eg4": "tsc && node lib/dev.js test/assets/eg4-before.txt test/assets/eg4-after.txt",
+    "dev:eg5": "tsc && node lib/dev.js test/assets/eg5-before.txt test/assets/eg5-after.txt",
     "cleanup": "rm -rf dist/ && rm -rf lib/ && rm -rf lib-test/",
     "test": "node lib-test/test/test.js"
   },
